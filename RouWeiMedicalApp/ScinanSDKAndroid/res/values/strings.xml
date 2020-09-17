@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="sdk_app_name">SDK</string>
+    <string name="twice_click_to_exit">Click again to exit the APP.</string>
+    <string name="check_app_update">Upgrade:</string>
+    <string name="check_app_update_fail">Is the latest version</string>
+    <string name="downloading_update">Downloading</string>
+    <string name="downloading_update_error">Download Failed.</string>
+    <string name="china">China</string>
+    <string name="xialashuaxin">Pull To Refresh</string>
+    <string name="songkaishuaxin">Loosen Refresh</string>
+    <string name="shuaxin">Refreshing...</string>
+    <string name="loadingmore">Loading More</string>
+    <string name="zhengzaijiazai">Loading...</string>
+    <string name="none">None!</string>
+    <string name="nodata">No Data</string>
+    <string name="sdk_error_ssl">SSL error.</string>
+    <string name="sdk_error_disable">Network anomaly.</string>
+    <string name="sdk_error_network">Network anomaly.</string>
+    <string name="sdk_error_login_expired">Login expired.</string>
+    <string name="sdk_error_forbidden">Forbidden.</string>
+    <string name="sdk_error_server_rest">Server unreachable.</string>
+    <string name="sdk_error_unknown">Unknown error.</string>
+    <string name="sdk_error_ap_passwd">AP password error.</string>
+    <string name="sdk_local_service_not_ready">Push service not ready.</string>
+</resources>

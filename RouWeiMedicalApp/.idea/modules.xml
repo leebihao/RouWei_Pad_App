@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/RouWeiApp.iml" filepath="$PROJECT_DIR$/.idea/modules/RouWeiApp.iml" group="RouWeiApp" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ScinanSDKAndroid/ScinanSDKAndroid.iml" filepath="$PROJECT_DIR$/.idea/modules/ScinanSDKAndroid/ScinanSDKAndroid.iml" group="RouWeiApp/ScinanSDKAndroid" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="RouWeiApp/app" />
+    </modules>
+  </component>
+</project>

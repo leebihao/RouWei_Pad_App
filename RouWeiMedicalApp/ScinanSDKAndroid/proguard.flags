@@ -1,0 +1,108 @@
+ -optimizationpasses 5
+ -dontusemixedcaseclassnames
+ -dontshrink
+ -dontoptimize
+ -dontskipnonpubliclibraryclasses
+ -dontpreverify
+ -ignorewarnings
+ -dontwarn android.webkit.WebView
+ -dontwarn android.net.http.SslError
+ -dontwarn android.webkit.WebViewClient
+ -dontwarn android.net.http.**
+ -dontwarn com.umeng.**
+ -dontwarn com.tencent.weibo.sdk.**
+ -dontwarn com.facebook.**
+
+ -verbose
+ -optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
+ -keep public class * extends android.app.Activity
+ -keep public class * extends android.view.View
+ -keep public class * extends android.app.Application
+ -keep public class * extends android.app.Service
+ -keep public class * extends android.content.BroadcastReceiver
+ -keep public class * extends android.content.ContentProvider
+ -keep public class * extends android.app.backup.BackupAgentHelper
+ -keep public class * extends android.preference.Preference
+ -keep public class android.net.http.SslError
+ -keep public class android.webkit.WebViewClient
+
+ -keep public class com.tendcloud.tenddata.** {public protected *;}
+
+
+# keep the line number of file
+-keepattributes SourceFile,LineNumberTable
+
+ # removes such information by default, so configure it to keep all of it.
+-keepattributes Signature
+
+# Gson specific classes
+-keep class sun.misc.Unsafe { *; }
+#-keep class com.google.gson.stream.** { *; }
+
+# Application classes that will be serialized/deserialized over Gson
+-keep class com.google.gson.examples.android.model.** { *; }
+
+ -keepclasseswithmembernames class * {
+     native <methods>;
+ }
+
+ -keepclasseswithmembernames class * {
+     public <init>(android.content.Context, android.util.AttributeSet);
+ }
+
+ -keepclasseswithmembernames class * {
+     public <init>(android.content.Context, android.util.AttributeSet, int);
+ }
+
+ -keepclassmembers enum * {
+     public static **[] values();
+     public static ** valueOf(java.lang.String);
+ }
+
+ -keep class * implements android.os.Parcelable {
+   public static final android.os.Parcelable$Creator *;
+ }
+
+-keep public class * implements java.io.Serializable {
+        public *;
+}
+
+-keepclassmembers class * implements java.io.Serializable {
+    static final long serialVersionUID;
+    private static final java.io.ObjectStreamField[] serialPersistentFields;
+    private void writeObject(java.io.ObjectOutputStream);
+    private void readObject(java.io.ObjectInputStream);
+    java.lang.Object writeReplace();
+    java.lang.Object readResolve();
+}
+
+-keep public class * implements android.animation.TypeEvaluator {
+    public *;
+}
+
+-keepclassmembers class * extends android.widget.TextView {
+    public java.math.BigDecimal getNumber();
+    public void setNumber(java.math.BigDecimal);
+}
+
+-keep enum com.facebook.**
+-keepattributes Exceptions,InnerClasses,Signature
+-keepattributes *Annotation*
+-keepattributes SourceFile,LineNumberTable
+
+-keep public interface com.facebook.**
+-keep public interface com.tencent.**
+-keep public interface com.umeng.socialize.**
+-keep public interface com.umeng.socialize.sensor.**
+-keep public interface com.umeng.scrshot.**
+
+-keep public class com.umeng.socialize.* {*;}
+-keep public class javax.**
+-keep public class android.webkit.**
+
+-keep class com.facebook.**
+-keep class com.umeng.scrshot.**
+-keep public class com.tencent.** {*;}
+-keep class com.umeng.socialize.sensor.**
+
+-keep class com.tencent.mm.sdk.modelmsg.WXMediaMessage {*;}

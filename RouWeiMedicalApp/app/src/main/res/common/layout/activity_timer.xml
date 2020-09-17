@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_app"
+    tools:context="com.lbh.rouwei.activity.TimerActivity">
+
+    <include
+        android:id="@+id/title_layout"
+        layout="@layout/layout_title_bar" />
+
+    <LinearLayout
+        android:id="@+id/ll_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_layout"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+
+        <cn.carbswang.android.numberpickerview.library.NumberPickerView
+            android:id="@+id/pickerHour"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="160dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="#11333333"
+            android:contentDescription="test_number_picker_view"
+            app:npv_ItemPaddingHorizontal="5dp"
+            app:npv_ItemPaddingVertical="5dp"
+            app:npv_RespondChangeOnDetached="false"
+            app:npv_ShownCount="3"
+            app:npv_TextSizeNormal="16sp"
+            app:npv_TextSizeSelected="20sp"
+            app:npv_WrapSelectorWheel="true" />
+
+        <cn.carbswang.android.numberpickerview.library.NumberPickerView
+            android:id="@+id/pickerMin"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="160dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="#11333333"
+            android:contentDescription="test_number_picker_view"
+            app:npv_ItemPaddingHorizontal="5dp"
+            app:npv_ItemPaddingVertical="5dp"
+            app:npv_RespondChangeOnDetached="false"
+            app:npv_ShownCount="3"
+            app:npv_TextSizeNormal="16sp"
+            app:npv_TextSizeSelected="20sp"
+            app:npv_WrapSelectorWheel="true" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_text_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_time"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:text="倒计时"
+        android:textColor="@color/grey_deep_5"
+        android:textSize="@dimen/dp_16" />
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_text_time"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:text="00:00:00"
+        android:textColor="@color/grey_deep_5"
+        android:textSize="@dimen/dp_20" />
+
+    <RelativeLayout
+        android:id="@+id/rl_btn"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_time"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp">
+
+        <Button
+            android:id="@+id/btn_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:background="@color/green"
+            android:text="启动"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dp_16" />
+
+        <Button
+            android:id="@+id/btn_stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:background="@color/green"
+            android:text="停止"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dp_16" />
+    </RelativeLayout>
+
+    <CheckedTextView
+        android:id="@+id/btn_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_btn"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dp_5"
+        android:drawableTop="@drawable/icon_home"
+        android:drawablePadding="@dimen/dp_5"
+        android:gravity="center_horizontal"
+        android:text="桌面"
+        android:textColor="@color/white" />
+</RelativeLayout>

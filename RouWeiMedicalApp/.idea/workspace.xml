@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config>
+        <device id="tv_1080p" />
+      </config>
+    </shared>
+  </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="Lbh_time" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e8870096-0221-4461-ab26-99d540c63c6c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/ScinanSDKAndroid/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/ScinanSDKAndroid/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScinanSDKAndroid/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ScinanSDKAndroid/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScinanSDKAndroid/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/ScinanSDKAndroid/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScinanSDKAndroid/libs/fastjson-1.2.7.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScinanSDKAndroid/res/values/color.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ScinanSDKAndroid/res/values/color.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/api/v1/base/QQOAuth.java" beforeDir="false" afterPath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/api/v1/base/QQOAuth.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/api/v2/base/DeviceAPIHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/api/v2/base/DeviceAPIHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/api/v2/base/QQOAuth.java" beforeDir="false" afterPath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/api/v2/base/QQOAuth.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/api/v2/network/RequestHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/api/v2/network/RequestHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/api/v2/network/base/BaseStack.java" beforeDir="false" afterPath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/api/v2/network/base/BaseStack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/connect/APConfigDeviceTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/connect/APConfigDeviceTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/connect/ConfigDeviceTaskFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/connect/ConfigDeviceTaskFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/connect/ConfigDeviceTaskFactory2.java" beforeDir="false" afterPath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/connect/ConfigDeviceTaskFactory2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/connect/ScinanConfigDeviceTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/connect/ScinanConfigDeviceTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/connect/SouthSV601Mix7681MultiConfigTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/connect/SouthSV601Mix7681MultiConfigTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/connect/TCPConnectDeviceClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/connect/TCPConnectDeviceClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/lan/v1/LANWorkThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/lan/v1/LANWorkThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/push/TcpTransport.java" beforeDir="false" afterPath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/push/TcpTransport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/service/DaemonService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/service/DaemonService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/service/PushService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/service/PushService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/ui/widget/GifView.java" beforeDir="false" afterPath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/ui/widget/GifView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/ui/widget/MaterialDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/ui/widget/MaterialDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/util/AndroidUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/util/AndroidUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/util/TimeUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/util/TimeUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/volley/PhotoMultipartRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ScinanSDKAndroid/src/com/scinan/sdk/volley/PhotoMultipartRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScinanSDKAndroid/src/org/fusesource/mqtt/codec/PINGREQ.java" beforeDir="false" afterPath="$PROJECT_DIR$/ScinanSDKAndroid/src/org/fusesource/mqtt/codec/PINGREQ.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScinanSDKAndroid/src/org/fusesource/mqtt/codec/PINGRESP.java" beforeDir="false" afterPath="$PROJECT_DIR$/ScinanSDKAndroid/src/org/fusesource/mqtt/codec/PINGRESP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScinanSDKAndroid/src/org/fusesource/mqtt/codec/PUBACK.java" beforeDir="false" afterPath="$PROJECT_DIR$/ScinanSDKAndroid/src/org/fusesource/mqtt/codec/PUBACK.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScinanSDKAndroid/src/org/fusesource/mqtt/codec/PUBCOMP.java" beforeDir="false" afterPath="$PROJECT_DIR$/ScinanSDKAndroid/src/org/fusesource/mqtt/codec/PUBCOMP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScinanSDKAndroid/src/org/fusesource/mqtt/codec/PUBLISH.java" beforeDir="false" afterPath="$PROJECT_DIR$/ScinanSDKAndroid/src/org/fusesource/mqtt/codec/PUBLISH.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScinanSDKAndroid/src/org/fusesource/mqtt/codec/PUBREC.java" beforeDir="false" afterPath="$PROJECT_DIR$/ScinanSDKAndroid/src/org/fusesource/mqtt/codec/PUBREC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScinanSDKAndroid/src/org/fusesource/mqtt/codec/PUBREL.java" beforeDir="false" afterPath="$PROJECT_DIR$/ScinanSDKAndroid/src/org/fusesource/mqtt/codec/PUBREL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScinanSDKAndroid/src/org/fusesource/mqtt/codec/SUBSCRIBE.java" beforeDir="false" afterPath="$PROJECT_DIR$/ScinanSDKAndroid/src/org/fusesource/mqtt/codec/SUBSCRIBE.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ScinanSDKAndroid/src/org/fusesource/mqtt/codec/UNSUBSCRIBE.java" beforeDir="false" afterPath="$PROJECT_DIR$/ScinanSDKAndroid/src/org/fusesource/mqtt/codec/UNSUBSCRIBE.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_29" />
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view />
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="resourceFile" />
+        <option value="valueResourceFile" />
+        <option value="layoutResourceFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/ScinanSDKAndroid" />
+  </component>
+  <component name="ProjectId" id="1gXsXcoULmhM1BnQ75c2ae3ZhNe" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DEBUGGABLE_DEVICE" value="incar-g3-MTK0002006111246010" />
+    <property name="DEBUGGABLE_PROCESS" value="com.lbh.rouwei.full" />
+    <property name="DEBUGGER_ID" value="Auto" />
+    <property name="MVP_HELPER_KEY_HAS_SUFFIX" value="true" />
+    <property name="MVP_HELPER_KEY_SUFFIX" value="Impl" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHOW_ALL_PROCESSES" value="false" />
+    <property name="android.recentlyUsedThemes" value="AppTheme.NoActionBar" />
+    <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.17" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="experimental" />
+  </component>
+  <component name="RecentsManager">
+    <key name="android.template.756819180">
+      <recent name="com.lbh.rouwei.activity" />
+    </key>
+    <key name="android.template.-2036663193">
+      <recent name="com.lbh.rouwei.activity" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/res/login/layout" />
+      <recent name="$PROJECT_DIR$/app/src/main/res/config/layout" />
+      <recent name="$PROJECT_DIR$/app/src/main/res/common/drawable" />
+      <recent name="$PROJECT_DIR$/app/src/main/res/common/drawable-xxhdpi" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.lbh.rouwei" />
+    </key>
+    <key name="android.template.936455951">
+      <recent name="com.lbh.rouwei.zmodule.config.ui.activity" />
+      <recent name="com.lbh.rouwei.zmodule.login.ui.activity" />
+    </key>
+    <key name="android.template.-554507236">
+      <recent name="com.lbh.rouwei.zmodule.login" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.lbh.rouwei.common.command" />
+      <recent name="com.lbh.rouwei.common.network" />
+      <recent name="com.lbh.rouwei.zmodule.config.ui.activity" />
+      <recent name="com.lbh.rouwei.zmodule.login.ui.fragment" />
+      <recent name="com.lbh.rouwei.common.utils" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/res/common/drawable-xxhdpi" />
+      <recent name="$PROJECT_DIR$/app/src/main/res/config/layout" />
+      <recent name="$PROJECT_DIR$/app/src/main/res/config/drawable-xxhdpi" />
+      <recent name="$PROJECT_DIR$/app/src/main/res/common/mipmap-xxhdpi" />
+      <recent name="$PROJECT_DIR$/app/src/main/res/common" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+      <module name="app" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Hybrid>
+      <Java />
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sample Java Methods" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e8870096-0221-4461-ab26-99d540c63c6c" name="Default Changelist" comment="" />
+      <created>1598272312305</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1598272312305</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="266" y="200" key="#PSD" timestamp="1600173303307">
+      <screen x="44" y="23" width="1396" height="877" />
+    </state>
+    <state x="266" y="200" key="#PSD/44.23.1396.877@44.23.1396.877" timestamp="1600173303307" />
+    <state x="267" y="200" key="#PSD/45.23.1395.877@45.23.1395.877" timestamp="1599139708557" />
+    <state x="553" y="178" key="#com.intellij.ide.util.MemberChooser" timestamp="1600181675092">
+      <screen x="43" y="23" width="1397" height="877" />
+    </state>
+    <state x="2142" y="210" key="#com.intellij.ide.util.MemberChooser/1440.23.1920.1057/40.23.1400.877@1440.23.1920.1057" timestamp="1599891472956" />
+    <state x="2142" y="210" key="#com.intellij.ide.util.MemberChooser/1440.23.1920.1057/44.23.1396.877@1440.23.1920.1057" timestamp="1599897589984" />
+    <state x="2142" y="210" key="#com.intellij.ide.util.MemberChooser/1440.23.1920.1057/47.23.1393.877@1440.23.1920.1057" timestamp="1599482091914" />
+    <state x="552" y="178" key="#com.intellij.ide.util.MemberChooser/41.23.1399.877@41.23.1399.877" timestamp="1599997884742" />
+    <state x="553" y="178" key="#com.intellij.ide.util.MemberChooser/43.23.1397.877@43.23.1397.877" timestamp="1600181675091" />
+    <state x="554" y="178" key="#com.intellij.ide.util.MemberChooser/44.23.1396.877@44.23.1396.877" timestamp="1599578131889" />
+    <state x="555" y="178" key="#com.intellij.ide.util.MemberChooser/45.23.1395.877@45.23.1395.877" timestamp="1599751232957" />
+    <state x="557" y="178" key="#com.intellij.ide.util.MemberChooser/48.23.1392.877@48.23.1392.877" timestamp="1598273557723" />
+    <state x="293" y="394" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1599570622486">
+      <screen x="44" y="23" width="1396" height="877" />
+    </state>
+    <state x="293" y="394" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/44.23.1396.877@44.23.1396.877" timestamp="1599570622486" />
+    <state x="294" y="394" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/45.23.1395.877@45.23.1395.877" timestamp="1598772810494" />
+    <state x="504" y="349" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages" timestamp="1598764179744">
+      <screen x="44" y="23" width="1396" height="877" />
+    </state>
+    <state x="504" y="349" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages/44.23.1396.877@44.23.1396.877" timestamp="1598764179744" />
+    <state x="2041" y="254" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1599900554894">
+      <screen x="1440" y="23" width="1920" height="1057" />
+    </state>
+    <state x="2041" y="254" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1440.23.1920.1057/43.23.1397.877@1440.23.1920.1057" timestamp="1599900554894" />
+    <state x="2041" y="254" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/1440.23.1920.1057/47.23.1393.877@1440.23.1920.1057" timestamp="1599485700137" />
+    <state x="481" y="215" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/44.23.1396.877@44.23.1396.877" timestamp="1598884858351" />
+    <state x="482" y="215" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/45.23.1395.877@45.23.1395.877" timestamp="1598770278798" />
+    <state x="331" y="223" key="AndroidCreateResourceDirectoryDialog" timestamp="1599750330401">
+      <screen x="45" y="23" width="1395" height="877" />
+    </state>
+    <state x="330" y="223" key="AndroidCreateResourceDirectoryDialog/44.23.1396.877@44.23.1396.877" timestamp="1598882668759" />
+    <state x="331" y="223" key="AndroidCreateResourceDirectoryDialog/45.23.1395.877@45.23.1395.877" timestamp="1599750330401" />
+    <state x="2196" y="364" key="AndroidCreateXmlResourceDialog" timestamp="1599484617571">
+      <screen x="1440" y="23" width="1920" height="1057" />
+    </state>
+    <state x="2196" y="364" key="AndroidCreateXmlResourceDialog/1440.23.1920.1057/47.23.1393.877@1440.23.1920.1057" timestamp="1599484617571" />
+    <state x="594" y="306" key="AndroidCreateXmlResourceDialog/44.23.1396.877@44.23.1396.877" timestamp="1598884516357" />
+    <state x="639" y="273" key="AndroidProcessChooserDialog" timestamp="1599569191784">
+      <screen x="44" y="23" width="1396" height="877" />
+    </state>
+    <state x="2258" y="324" key="AndroidProcessChooserDialog/1440.23.1920.1057/47.23.1393.877@1440.23.1920.1057" timestamp="1599487619449" />
+    <state x="639" y="273" key="AndroidProcessChooserDialog/44.23.1396.877@44.23.1396.877" timestamp="1599569191784" />
+    <state x="330" y="173" key="AndroidThemeDialog" timestamp="1599659999439">
+      <screen x="45" y="23" width="1395" height="877" />
+    </state>
+    <state x="330" y="173" key="AndroidThemeDialog/45.23.1395.877@45.23.1395.877" timestamp="1599659999439" />
+    <state width="1352" height="160" key="GridCell.Tab.0.bottom" timestamp="1600175379819">
+      <screen x="43" y="23" width="1397" height="877" />
+    </state>
+    <state width="1876" height="801" key="GridCell.Tab.0.bottom/1440.23.1920.1057/43.23.1397.877@1440.23.1920.1057" timestamp="1599901145876" />
+    <state width="1876" height="357" key="GridCell.Tab.0.bottom/1440.23.1920.1057/47.23.1393.877@1440.23.1920.1057" timestamp="1599488932025" />
+    <state width="1348" height="230" key="GridCell.Tab.0.bottom/1440.23.1920.1057/48.23.1392.877@48.23.1392.877" timestamp="1598315917377" />
+    <state width="1352" height="285" key="GridCell.Tab.0.bottom/41.23.1399.877@41.23.1399.877" timestamp="1600175077154" />
+    <state width="1352" height="160" key="GridCell.Tab.0.bottom/43.23.1397.877@43.23.1397.877" timestamp="1600175379819" />
+    <state width="1352" height="101" key="GridCell.Tab.0.bottom/44.23.1396.877@44.23.1396.877" timestamp="1600173247932" />
+    <state width="1351" height="639" key="GridCell.Tab.0.bottom/45.23.1395.877@45.23.1395.877" timestamp="1599751052378" />
+    <state width="1348" height="230" key="GridCell.Tab.0.bottom/47.23.1393.877@47.23.1393.877" timestamp="1598274813031" />
+    <state width="1348" height="188" key="GridCell.Tab.0.bottom/48.23.1392.877@48.23.1392.877" timestamp="1598274136641" />
+    <state width="1352" height="160" key="GridCell.Tab.0.center" timestamp="1600175379818">
+      <screen x="43" y="23" width="1397" height="877" />
+    </state>
+    <state width="1876" height="801" key="GridCell.Tab.0.center/1440.23.1920.1057/43.23.1397.877@1440.23.1920.1057" timestamp="1599901145876" />
+    <state width="1876" height="357" key="GridCell.Tab.0.center/1440.23.1920.1057/47.23.1393.877@1440.23.1920.1057" timestamp="1599488932024" />
+    <state width="1348" height="230" key="GridCell.Tab.0.center/1440.23.1920.1057/48.23.1392.877@48.23.1392.877" timestamp="1598315917376" />
+    <state width="1352" height="285" key="GridCell.Tab.0.center/41.23.1399.877@41.23.1399.877" timestamp="1600175077154" />
+    <state width="1352" height="160" key="GridCell.Tab.0.center/43.23.1397.877@43.23.1397.877" timestamp="1600175379818" />
+    <state width="1352" height="101" key="GridCell.Tab.0.center/44.23.1396.877@44.23.1396.877" timestamp="1600173247931" />
+    <state width="1351" height="639" key="GridCell.Tab.0.center/45.23.1395.877@45.23.1395.877" timestamp="1599751052377" />
+    <state width="1348" height="230" key="GridCell.Tab.0.center/47.23.1393.877@47.23.1393.877" timestamp="1598274813030" />
+    <state width="1348" height="188" key="GridCell.Tab.0.center/48.23.1392.877@48.23.1392.877" timestamp="1598274136640" />
+    <state width="1352" height="160" key="GridCell.Tab.0.left" timestamp="1600175379816">
+      <screen x="43" y="23" width="1397" height="877" />
+    </state>
+    <state width="1876" height="801" key="GridCell.Tab.0.left/1440.23.1920.1057/43.23.1397.877@1440.23.1920.1057" timestamp="1599901145874" />
+    <state width="1876" height="357" key="GridCell.Tab.0.left/1440.23.1920.1057/47.23.1393.877@1440.23.1920.1057" timestamp="1599488932024" />
+    <state width="1348" height="230" key="GridCell.Tab.0.left/1440.23.1920.1057/48.23.1392.877@48.23.1392.877" timestamp="1598315917376" />
+    <state width="1352" height="285" key="GridCell.Tab.0.left/41.23.1399.877@41.23.1399.877" timestamp="1600175077151" />
+    <state width="1352" height="160" key="GridCell.Tab.0.left/43.23.1397.877@43.23.1397.877" timestamp="1600175379816" />
+    <state width="1352" height="101" key="GridCell.Tab.0.left/44.23.1396.877@44.23.1396.877" timestamp="1600173247930" />
+    <state width="1351" height="639" key="GridCell.Tab.0.left/45.23.1395.877@45.23.1395.877" timestamp="1599751052376" />
+    <state width="1348" height="230" key="GridCell.Tab.0.left/47.23.1393.877@47.23.1393.877" timestamp="1598274813030" />
+    <state width="1348" height="188" key="GridCell.Tab.0.left/48.23.1392.877@48.23.1392.877" timestamp="1598274136639" />
+    <state width="1352" height="160" key="GridCell.Tab.0.right" timestamp="1600175379818">
+      <screen x="43" y="23" width="1397" height="877" />
+    </state>
+    <state width="1876" height="801" key="GridCell.Tab.0.right/1440.23.1920.1057/43.23.1397.877@1440.23.1920.1057" timestamp="1599901145876" />
+    <state width="1876" height="357" key="GridCell.Tab.0.right/1440.23.1920.1057/47.23.1393.877@1440.23.1920.1057" timestamp="1599488932025" />
+    <state width="1348" height="230" key="GridCell.Tab.0.right/1440.23.1920.1057/48.23.1392.877@48.23.1392.877" timestamp="1598315917376" />
+    <state width="1352" height="285" key="GridCell.Tab.0.right/41.23.1399.877@41.23.1399.877" timestamp="1600175077154" />
+    <state width="1352" height="160" key="GridCell.Tab.0.right/43.23.1397.877@43.23.1397.877" timestamp="1600175379818" />
+    <state width="1352" height="101" key="GridCell.Tab.0.right/44.23.1396.877@44.23.1396.877" timestamp="1600173247932" />
+    <state width="1351" height="639" key="GridCell.Tab.0.right/45.23.1395.877@45.23.1395.877" timestamp="1599751052377" />
+    <state width="1348" height="230" key="GridCell.Tab.0.right/47.23.1393.877@47.23.1393.877" timestamp="1598274813030" />
+    <state width="1348" height="188" key="GridCell.Tab.0.right/48.23.1392.877@48.23.1392.877" timestamp="1598274136640" />
+    <state width="1352" height="285" key="GridCell.Tab.1.bottom" timestamp="1600175077156">
+      <screen x="41" y="23" width="1399" height="877" />
+    </state>
+    <state width="1876" height="357" key="GridCell.Tab.1.bottom/1440.23.1920.1057/47.23.1393.877@1440.23.1920.1057" timestamp="1599488932026" />
+    <state width="1352" height="285" key="GridCell.Tab.1.bottom/41.23.1399.877@41.23.1399.877" timestamp="1600175077156" />
+    <state width="1352" height="285" key="GridCell.Tab.1.bottom/44.23.1396.877@44.23.1396.877" timestamp="1599569365356" />
+    <state width="1352" height="285" key="GridCell.Tab.1.center" timestamp="1600175077155">
+      <screen x="41" y="23" width="1399" height="877" />
+    </state>
+    <state width="1876" height="357" key="GridCell.Tab.1.center/1440.23.1920.1057/47.23.1393.877@1440.23.1920.1057" timestamp="1599488932026" />
+    <state width="1352" height="285" key="GridCell.Tab.1.center/41.23.1399.877@41.23.1399.877" timestamp="1600175077155" />
+    <state width="1352" height="285" key="GridCell.Tab.1.center/44.23.1396.877@44.23.1396.877" timestamp="1599569365356" />
+    <state width="1352" height="285" key="GridCell.Tab.1.left" timestamp="1600175077155">
+      <screen x="41" y="23" width="1399" height="877" />
+    </state>
+    <state width="1876" height="357" key="GridCell.Tab.1.left/1440.23.1920.1057/47.23.1393.877@1440.23.1920.1057" timestamp="1599488932025" />
+    <state width="1352" height="285" key="GridCell.Tab.1.left/41.23.1399.877@41.23.1399.877" timestamp="1600175077155" />
+    <state width="1352" height="285" key="GridCell.Tab.1.left/44.23.1396.877@44.23.1396.877" timestamp="1599569365355" />
+    <state width="1352" height="285" key="GridCell.Tab.1.right" timestamp="1600175077156">
+      <screen x="41" y="23" width="1399" height="877" />
+    </state>
+    <state width="1876" height="357" key="GridCell.Tab.1.right/1440.23.1920.1057/47.23.1393.877@1440.23.1920.1057" timestamp="1599488932026" />
+    <state width="1352" height="285" key="GridCell.Tab.1.right/41.23.1399.877@41.23.1399.877" timestamp="1600175077156" />
+    <state width="1352" height="285" key="GridCell.Tab.1.right/44.23.1396.877@44.23.1396.877" timestamp="1599569365356" />
+    <state x="1835" y="250" key="IDE.errors.dialog" timestamp="1599900733333">
+      <screen x="1440" y="23" width="1920" height="1057" />
+    </state>
+    <state x="1835" y="250" key="IDE.errors.dialog/1440.23.1920.1057/41.23.1399.877@1440.23.1920.1057" timestamp="1599900733333" />
+    <state x="331" y="211" key="IDE.errors.dialog/44.23.1396.877@44.23.1396.877" timestamp="1598875089879" />
+    <state x="332" y="211" key="IDE.errors.dialog/45.23.1395.877@45.23.1395.877" timestamp="1599319669091" />
+    <state x="283" y="100" key="SettingsEditor" timestamp="1599353049685">
+      <screen x="45" y="23" width="1395" height="877" />
+    </state>
+    <state x="282" y="100" key="SettingsEditor/44.23.1396.877@44.23.1396.877" timestamp="1598707501517" />
+    <state x="283" y="100" key="SettingsEditor/45.23.1395.877@45.23.1395.877" timestamp="1599353049685" />
+    <state x="145" y="123" width="1195" height="677" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1598875656084">
+      <screen x="44" y="23" width="1396" height="877" />
+    </state>
+    <state x="145" y="123" width="1195" height="677" key="com.android.tools.idea.avdmanager.AvdListDialog/44.23.1396.877@44.23.1396.877" timestamp="1598875656084" />
+    <state x="148" y="123" width="1192" height="677" key="com.android.tools.idea.avdmanager.AvdListDialog/47.23.1393.877@47.23.1393.877" timestamp="1598274704210" />
+    <state x="1940" y="252" width="923" height="815" key="search.everywhere.popup" timestamp="1599897180703">
+      <screen x="1440" y="23" width="1920" height="1057" />
+    </state>
+    <state x="1940" y="252" width="923" height="815" key="search.everywhere.popup/1440.23.1920.1057/44.23.1396.877@1440.23.1920.1057" timestamp="1599897180703" />
+    <state x="1939" y="252" width="922" height="815" key="search.everywhere.popup/1440.23.1920.1057/47.23.1393.877@1440.23.1920.1057" timestamp="1599481991454" />
+    <state x="407" y="213" width="670" height="676" key="search.everywhere.popup/44.23.1396.877@44.23.1396.877" timestamp="1599656834212" />
+    <state x="408" y="213" width="670" height="676" key="search.everywhere.popup/45.23.1395.877@45.23.1395.877" timestamp="1599751809479" />
+  </component>
+</project>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+
+
+    <!--主色调-->
+    <color name="main_color">@color/blue</color>
+
+    <color name="white">@android:color/white</color>
+
+    <color name="line_gray">#E7E7E7</color>
+    <color name="background_white">#f5f5f5</color>
+
+
+    <!-- 新增加-->
+
+    <color name="grey">#999999</color>
+    <color name="white2">#f7f7f7</color>
+    <color name="black">#313131</color>
+    <color name="orange">#2BFE0F<!-- #F26F00 --></color><!-- 将 橙色 修改为  亮绿色 -->
+    <color name="green_dark">#54E204</color><!-- 深绿色 -->
+    <color name="green_white">#92F01F</color><!-- 浅绿色 -->
+    <color name="touming">#00000000</color>
+    <color name="bgcolor">#FFFFFF</color>
+    <color name="ttcolor">#34323233</color>
+    <color name="red">#FF0000</color>
+    <color name="yellow">#F26F00</color>
+    <color name="purple">#9999FF</color>
+    <color name="dark_blue">#00479d</color>
+    <color name="light_red">#ff2d21</color>
+    <color name="blue">#005cb9</color>
+    <color name="green">#94d60a</color>
+    <color name="blue_main_tab">#3434D1</color>
+    <color name="blue_main_line">#357dc7</color>
+    <color name="grey_summary">#bababa</color>
+
+    <color name="bg_white">#ffffff</color>
+    <color name="bg_black">#000000</color>
+    <color name="gradual_red">#ed1c24</color>
+    <color name="gradual_orange">#fbb036</color>
+    <color name="light_gray">#e6e6e6</color>
+    <color name="little_gray">#f0f0f0</color>
+    <color name="mid_gray">#afafaf</color>
+    <color name="dark_gray">#808080</color>
+    <color name="bg_color">#F4F3F3</color>
+    <color name="divider_gray">#e3e3e3</color>
+
+    <color name="timer_checked">@color/white</color>
+    <color name="timer_un_checked">@color/blue</color>
+
+    <color name="color_accent">@color/main_color</color>
+    <!-- 标题栏颜色 -->
+    <color name="color_primary">@color/main_color</color>
+    <!-- 状态栏颜色 -->
+    <color name="color_primary_dark">@color/main_color</color>
+
+
+    <color name="button_def_color_1">#005cb9</color>
+    <color name="button_press_color_1">#004a94</color>
+
+    <color name="button_def_color_2">#94d60a</color>
+    <color name="button_press_color_2">#76ab08</color>
+
+    <color name="text_color_1">#ffffff</color>
+    <color name="text_color_2">#999999</color>
+    <color name="text_color_3">#666666</color>
+    <color name="text_color_4">#555555</color>
+    <color name="text_color_5">#005cb9</color>
+    <color name="text_color_6">#a7adb5</color>
+    <color name="text_color_7">#929292</color>
+    <color name="text_color_8">#d3d3d3</color>
+    <color name="text_color_9">#333333</color>
+
+    <color name="text_hint_color">@color/text_color_2</color>
+    <color name="devices_title_bg_color">#93b8dd</color>
+
+    <color name="black_overlay">#66000000</color>
+
+</resources>

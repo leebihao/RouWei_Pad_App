@@ -1,0 +1,2 @@
+include ':app',':ScinanSDKAndroid'
+rootProject.name = "RouWeiApp"

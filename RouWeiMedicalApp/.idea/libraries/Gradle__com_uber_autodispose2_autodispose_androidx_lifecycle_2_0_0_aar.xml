@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.uber.autodispose2:autodispose-androidx-lifecycle:2.0.0@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/bd13181f9a4b28421392d6eae6903366/jetified-autodispose-androidx-lifecycle-2.0.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/bd13181f9a4b28421392d6eae6903366/jetified-autodispose-androidx-lifecycle-2.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/bd13181f9a4b28421392d6eae6903366/jetified-autodispose-androidx-lifecycle-2.0.0/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.uber.autodispose2/autodispose-androidx-lifecycle/2.0.0/fab0013456091fdc5c4027e40f1e8b7910fb81df/autodispose-androidx-lifecycle-2.0.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.uber.autodispose2/autodispose-androidx-lifecycle/2.0.0/d2291204c501c9b4651a2667e6d16e3050f176e9/autodispose-androidx-lifecycle-2.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

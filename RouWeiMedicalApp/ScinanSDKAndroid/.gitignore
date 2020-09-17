@@ -1,0 +1,14 @@
+.gradle
+.idea
+.DS_Store
+*.log
+build
+*/build
+*.iml
+GalleryFinalLib
+UmengSocialSdkLib
+gradle/
+gradlew
+gradlew.bat
+local.properties
+UmengSDK2
