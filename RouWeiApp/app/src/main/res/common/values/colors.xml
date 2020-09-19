@@ -78,4 +78,10 @@
 
     <color name="black_overlay">#66000000</color>
 
+    <color name="wind_bg_green">#5FD5A0</color>
+    <color name="wind_bg_blue">#00C5C6</color>
+    <color name="wind_bg_orange">#FF9956</color>
+    <color name="wind_bg_red">#FF175B</color>
+    <color name="wind_bg_red_black">#B1538A</color>
+
 </resources>

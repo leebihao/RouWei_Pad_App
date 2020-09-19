@@ -105,5 +105,13 @@
     <string name="add_success">add device successful</string>
     <string name="add_device_fail">add device fail</string>
     <string name="local_service_not_ready">Service unreachable.</string>
+    <string name="tip_open_power">Please power on</string>
 
+    <array name="array_wind">
+        <item>@drawable/icon_wind_1</item>
+        <item>@drawable/icon_wind_2</item>
+        <item>@drawable/icon_wind_3</item>
+        <item>@drawable/icon_wind_4</item>
+        <item>@drawable/icon_wind_5</item>
+    </array>
 </resources>

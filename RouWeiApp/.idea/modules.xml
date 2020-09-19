@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/RouWeiApp.iml" filepath="$PROJECT_DIR$/.idea/modules/RouWeiApp.iml" group="RouWeiApp" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ScinanSDKAndroid/RouWeiApp-ScinanSDKAndroid.iml" filepath="$PROJECT_DIR$/.idea/modules/ScinanSDKAndroid/RouWeiApp-ScinanSDKAndroid.iml" group="RouWeiApp/ScinanSDKAndroid" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/RouWeiApp-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/RouWeiApp-app.iml" group="RouWeiApp/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/RouWei_Pad_App-RouWeiApp.iml" filepath="$PROJECT_DIR$/.idea/modules/RouWei_Pad_App-RouWeiApp.iml" group="RouWeiApp" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ScinanSDKAndroid/ScinanSDKAndroid.iml" filepath="$PROJECT_DIR$/.idea/modules/ScinanSDKAndroid/ScinanSDKAndroid.iml" group="RouWeiApp/ScinanSDKAndroid" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="RouWeiApp/app" />
     </modules>

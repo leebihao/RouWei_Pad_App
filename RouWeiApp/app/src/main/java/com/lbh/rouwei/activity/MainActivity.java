@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-
 import com.blankj.utilcode.util.TimeUtils;
 import com.lbh.rouwei.R;
 import com.lbh.rouwei.bese.BaseMvpActivity;
@@ -21,7 +20,6 @@ import com.lbh.rouwei.zmodule.config.ui.activity.AirkissConfigStep1Activity;
 import com.lbh.rouwei.zmodule.login.ui.activity.LoginActivity;
 import com.scinan.sdk.hardware.HardwareCmd;
 import com.scinan.sdk.util.TimeUtil;
-import com.socks.library.KLog;
 
 import java.util.Date;
 
@@ -72,6 +70,9 @@ public class MainActivity extends BaseMvpActivity {
     @BindView(R.id.container)
     ConstraintLayout container;
 
+    AllStatus allStatus;
+    int windValue = 1;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_main;
@@ -101,6 +102,7 @@ public class MainActivity extends BaseMvpActivity {
 
     @OnClick(R.id.iv_back)
     public void onIvBackClicked() {
+        AppUtil.goAndroidHome(context);
     }
 
     @OnClick(R.id.btn_login)
@@ -119,12 +121,26 @@ public class MainActivity extends BaseMvpActivity {
 
     @OnClick(R.id.rb_function)
     public void onRbFunctionClicked() {
-        startActivity(new Intent(this, FunctionActivity.class));
+        if (allStatus.isPowerOn()) {
+            showToast(getString(R.string.tip_open_power));
+            return;
+        }
+        Intent intent = new Intent(this, FunctionActivity.class);
+        intent.putExtra("bean", allStatus);
+        startActivity(intent);
     }
 
     @OnClick(R.id.rb_wind)
     public void onRbWindClicked() {
-        startActivity(new Intent(this, WindActivity.class));
+        if (allStatus.isPowerOn()) {
+            showToast(getString(R.string.tip_open_power));
+            return;
+        }
+        Intent intent = new Intent(this, WindActivity.class);
+        intent.putExtra("windspeed", windValue);
+        intent.putExtra("bean", allStatus);
+        intent.putExtra("flagPage", 1);
+        startActivity(intent);
     }
 
     @OnClick(R.id.rb_timer)
@@ -134,7 +150,15 @@ public class MainActivity extends BaseMvpActivity {
 
     @OnClick(R.id.rb_mode)
     public void onRbModeClicked() {
-        startActivity(new Intent(this, WindActivity.class));
+        if (allStatus.isPowerOn()) {
+            showToast(getString(R.string.tip_open_power));
+            return;
+        }
+        Intent intent = new Intent(this, WindActivity.class);
+        intent.putExtra("windspeed", windValue);
+        intent.putExtra("bean", allStatus);
+        intent.putExtra("flagPage", 0);
+        startActivity(intent);
     }
 
     @OnClick(R.id.rb_bizhi)
@@ -145,7 +169,8 @@ public class MainActivity extends BaseMvpActivity {
     @Override
     public void updateUIPush(HardwareCmd hardwareCmd) {
         super.updateUIPush(hardwareCmd);
-        AllStatus allStatus = AllStatus.parseAllStatus(hardwareCmd.data);
+
+        allStatus = AllStatus.parseAllStatus(hardwareCmd.data);
         updateUI(allStatus);
     }
 
@@ -153,7 +178,7 @@ public class MainActivity extends BaseMvpActivity {
         btnPower.setImageResource(allStatus.isPowerOn() ? R.drawable.icon_switch_on : R.drawable.icon_switch_off);
         llCurData.setVisibility(allStatus.isPowerOn() ? View.VISIBLE : View.GONE);
 
-        tvDateTime.setText(TimeUtils.millis2String(System.currentTimeMillis(),"HH:mm"));
+        tvDateTime.setText(TimeUtils.millis2String(System.currentTimeMillis(), "HH:mm"));
         String mode = allStatus.mode;
         if ("1".equals(mode)) {
             tvCurMode.setText("手动");
@@ -162,6 +187,8 @@ public class MainActivity extends BaseMvpActivity {
         }
 
         tv_cur_temp.setText(allStatus.temperature + "℃");
+        windValue = allStatus.getWindValue();
+        tvCurWind.setText("风速：" + windValue);
         tvCurFunction.setText(allStatus.isNegativeIonSwitchOn() ? "功能：负离子开" : "功能：负离子关");
 
 

@@ -108,4 +108,5 @@
     <string name="add_success">添加成功</string>
     <string name="add_device_fail">添加设备失败</string>
     <string name="local_service_not_ready">正在连接服务，请稍后</string>
+    <string name="tip_open_power">请开机</string>
 </resources>

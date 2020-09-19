@@ -6,12 +6,15 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+
 import com.lbh.rouwei.R;
 import com.lbh.rouwei.bese.BaseMvpActivity;
+import com.lbh.rouwei.common.bean.AllStatus;
 import com.lbh.rouwei.common.utils.AppUtil;
+import com.scinan.sdk.hardware.HardwareCmd;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -38,6 +41,15 @@ public class FunctionActivity extends BaseMvpActivity {
     @BindView(R.id.btn_home)
     CheckedTextView btnHome;
 
+    AllStatus allStatus;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        allStatus = (AllStatus) getIntent().getSerializableExtra("bean");
+
+    }
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_function;
@@ -46,6 +58,14 @@ public class FunctionActivity extends BaseMvpActivity {
     @Override
     public void initView() {
 
+        updateFunUi();
+    }
+
+    private void updateFunUi() {
+        rlNegativeicon.setBackgroundColor(allStatus.isNegativeIonSwitchOn() ? getResources().getColor(R.color.blue) : getResources().getColor(R.color.grey));
+        rlUv.setBackgroundColor(allStatus.isUVSwitchOn() ? getResources().getColor(R.color.blue) : getResources().getColor(R.color.grey));
+        ivNegativeicon.setImageResource(allStatus.isNegativeIonSwitchOn() ? R.drawable.icon_negative_p : R.drawable.icon_negative_n);
+        ivUv.setImageResource(allStatus.isUVSwitchOn() ? R.drawable.icon_uv_p : R.drawable.icon_uv_p);
     }
 
     @Override
@@ -81,4 +101,10 @@ public class FunctionActivity extends BaseMvpActivity {
         AppUtil.goAndroidHome(context);
     }
 
+    @Override
+    public void updateUIPush(HardwareCmd hardwareCmd) {
+        super.updateUIPush(hardwareCmd);
+        allStatus = AllStatus.parseAllStatus(hardwareCmd.data);
+        updateFunUi();
+    }
 }

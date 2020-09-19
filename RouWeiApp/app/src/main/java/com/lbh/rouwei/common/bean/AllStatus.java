@@ -1,5 +1,7 @@
 package com.lbh.rouwei.common.bean;
 
+import java.io.Serializable;
+
 /**
  * <pre>
  *     author : kentli
@@ -9,7 +11,7 @@ package com.lbh.rouwei.common.bean;
  *     /S00/1/开关状态，风速，模式，温度，室内PM2.5值，负离子开关，定时时间，杀菌状态，湿度，蜂鸣状态
  * </pre>
  */
-public class AllStatus {
+public class AllStatus implements Serializable {
 
     public String switchStatus;
     public String windSpeed;
@@ -50,6 +52,18 @@ public class AllStatus {
             e.printStackTrace();
         }
         return intWind;
+    }
+
+    public int getPM25() {
+        int pm25Value = 0;
+        try {
+            pm25Value = Integer.parseInt(this.pm25);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+
+        return pm25Value;
     }
 
     public boolean isNegativeIonSwitchOn() {
