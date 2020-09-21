@@ -23,7 +23,6 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.RemoteException;
-
 import android.text.TextUtils;
 
 import androidx.core.app.NotificationCompat;

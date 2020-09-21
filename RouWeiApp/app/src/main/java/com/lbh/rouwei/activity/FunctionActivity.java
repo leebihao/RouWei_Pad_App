@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import com.lbh.rouwei.R;
 import com.lbh.rouwei.bese.BaseMvpActivity;
 import com.lbh.rouwei.common.bean.AllStatus;
+import com.lbh.rouwei.common.hardware.AppOptionCode;
 import com.lbh.rouwei.common.utils.AppUtil;
 import com.scinan.sdk.hardware.HardwareCmd;
 
@@ -42,6 +43,7 @@ public class FunctionActivity extends BaseMvpActivity {
     CheckedTextView btnHome;
 
     AllStatus allStatus;
+    String deviceId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -90,10 +92,12 @@ public class FunctionActivity extends BaseMvpActivity {
 
     @OnClick(R.id.rl_negativeicon)
     public void onRlNegativeiconClicked() {
+        mAppController.sendCommand(AppOptionCode.STATUS_SWITCH_NEGAT, deviceId, allStatus.isNegativeIonSwitchOn() ? "0" : "1");
     }
 
     @OnClick(R.id.rl_uv)
     public void onRlUvClicked() {
+        mAppController.sendCommand(AppOptionCode.STATUS_SWITCH_UV, deviceId, allStatus.isUVSwitchOn() ? "0" : "1");
     }
 
     @OnClick(R.id.btn_home)

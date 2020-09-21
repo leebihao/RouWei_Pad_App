@@ -15,6 +15,7 @@ import com.blankj.utilcode.util.TimeUtils;
 import com.lbh.rouwei.R;
 import com.lbh.rouwei.bese.BaseMvpActivity;
 import com.lbh.rouwei.common.bean.AllStatus;
+import com.lbh.rouwei.common.hardware.AppOptionCode;
 import com.lbh.rouwei.common.utils.AppUtil;
 import com.lbh.rouwei.zmodule.config.ui.activity.AirkissConfigStep1Activity;
 import com.lbh.rouwei.zmodule.login.ui.activity.LoginActivity;
@@ -70,8 +71,10 @@ public class MainActivity extends BaseMvpActivity {
     @BindView(R.id.container)
     ConstraintLayout container;
 
+    String deviceId;
     AllStatus allStatus;
     int windValue = 1;
+    private boolean isPowerOn = false;
 
     @Override
     public int getLayoutId() {
@@ -112,6 +115,7 @@ public class MainActivity extends BaseMvpActivity {
 
     @OnClick(R.id.btn_power)
     public void onBtnPowerClicked() {
+        mAppController.sendCommand(AppOptionCode.STATUS_SWITCH_POWER, deviceId, isPowerOn ? "0" : "1");
     }
 
     @OnClick(R.id.rb_home)
@@ -175,6 +179,7 @@ public class MainActivity extends BaseMvpActivity {
     }
 
     private void updateUI(AllStatus allStatus) {
+        isPowerOn = allStatus.isPowerOn();
         btnPower.setImageResource(allStatus.isPowerOn() ? R.drawable.icon_switch_on : R.drawable.icon_switch_off);
         llCurData.setVisibility(allStatus.isPowerOn() ? View.VISIBLE : View.GONE);
 
