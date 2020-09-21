@@ -38,6 +38,11 @@
         android:screenOrientation="reverseLandscape"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar.rouwei">
+
+        <meta-data
+            android:name="SCINAN_COMPANY"
+            android:value="2001" />
+
         <activity
             android:name=".activity.TimerActivity"
             android:screenOrientation="landscape"></activity>

@@ -56,7 +56,7 @@ public class AirkissConfigStep3Activity extends BaseMvpActivity implements Confi
     final ScinanConnectDevice mConnectScinanDevice = new ScinanConnectDevice() {
         @Override
         public String getCompanyId() {
-            return companyId;
+            return "2001";
         }
     };
 
