@@ -93,8 +93,8 @@
                 android:imeOptions="actionDone"
                 android:inputType="textPassword"
                 android:selectAllOnFocus="true"
-                android:textColor="@color/white"
-                android:text="longjingjiezu"/>
+                android:textColor="@color/white" />
+<!--            android:text="longjingjiezu"-->
         </LinearLayout>
 
 

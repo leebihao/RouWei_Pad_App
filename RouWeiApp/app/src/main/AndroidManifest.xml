@@ -45,7 +45,7 @@
             android:name=".zmodule.config.ui.activity.AirkissConfigStep1Activity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="landscape"
-            android:theme="@style/FullscreenTheme">
+            android:theme="@style/AppTheme.NoActionBar.rouwei">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -58,8 +58,7 @@
         <activity
             android:name=".zmodule.config.ui.activity.AirkissConfigStep3Activity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="landscape"
-            android:theme="@style/FullscreenTheme" />
+            android:screenOrientation="landscape" />
         <activity
             android:name=".zmodule.login.ui.activity.ForgetChooseActivity"
             android:screenOrientation="landscape" />
@@ -80,7 +79,13 @@
         </activity>
         <activity
             android:name=".activity.SplashActivity"
-            android:screenOrientation="landscape" />
+            android:theme="@style/AppTheme.NoActionBar.rouwei"
+            android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activity.WindActivity"
             android:screenOrientation="landscape" />
@@ -88,13 +93,15 @@
             android:name=".activity.FunctionActivity"
             android:screenOrientation="landscape" />
         <activity
+            android:name=".activity.DeviceListActivity"
+            android:screenOrientation="landscape" />
+        <activity
             android:name=".activity.MainActivity"
             android:screenOrientation="landscape">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.MAIN" />-->
+            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+            <!--            </intent-filter>-->
         </activity>
 
         <service

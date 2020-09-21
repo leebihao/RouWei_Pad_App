@@ -2,11 +2,8 @@ package com.lbh.rouwei.zmodule.config.ui.activity;
 
 import android.Manifest;
 import android.content.Intent;
-import android.os.Bundle;
 import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.lbh.rouwei.R;

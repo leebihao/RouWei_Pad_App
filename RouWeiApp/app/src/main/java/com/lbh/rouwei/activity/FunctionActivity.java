@@ -43,7 +43,6 @@ public class FunctionActivity extends BaseMvpActivity {
     CheckedTextView btnHome;
 
     AllStatus allStatus;
-    String deviceId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,7 +58,7 @@ public class FunctionActivity extends BaseMvpActivity {
 
     @Override
     public void initView() {
-
+        super.initView();
         updateFunUi();
     }
 

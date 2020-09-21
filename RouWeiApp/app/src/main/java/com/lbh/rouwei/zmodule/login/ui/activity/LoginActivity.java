@@ -19,7 +19,10 @@ import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.lbh.rouwei.R;
+import com.lbh.rouwei.activity.MainActivity;
 import com.lbh.rouwei.bese.BaseMvpActivity;
+import com.lbh.rouwei.common.constant.Constant;
+import com.lbh.rouwei.zmodule.config.ui.activity.AirkissConfigStep1Activity;
 import com.scinan.sdk.api.v2.agent.UserAgent;
 import com.scinan.sdk.api.v2.network.RequestHelper;
 import com.scinan.sdk.bean.Account;
@@ -28,6 +31,7 @@ import com.scinan.sdk.interfaces.LoginCallback;
 import com.scinan.sdk.util.JsonUtil;
 import com.scinan.sdk.util.LogUtil;
 import com.scinan.sdk.util.PreferenceUtil;
+import com.tencent.mmkv.MMKV;
 
 import butterknife.BindView;
 import butterknife.OnCheckedChanged;
@@ -185,8 +189,14 @@ public class LoginActivity extends BaseMvpActivity implements LoginCallback {
 //        dismissWaitDialog();
         PreferenceUtil.saveAccount(this, new Account(usernameStr, passwordStr, scinanToken, openId, digst, "true"));
         Configuration.setToken(scinanToken);
-//        MainActivity_.intent(this).start();
-//        finish();
+        //判断是否存在设备，没有的话就进去添加设备页面
+        String deviceid = MMKV.defaultMMKV().decodeString(Constant.KEY_DEVICE_ID);
+        if (TextUtils.isEmpty(deviceid)) {
+            startActivity(new Intent(this, AirkissConfigStep1Activity.class));
+        } else {
+            startActivity(new Intent(this, MainActivity.class));
+        }
+        finish();
     }
 
     @Override

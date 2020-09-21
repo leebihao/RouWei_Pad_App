@@ -17,4 +17,6 @@ public class Constant {
     public static final String APP_KEY_RELEASE = "100147";
     public static final String APP_SECRET_DEBUG = "E951B860717D482B97C102FC8A15878F";
     public static final String APP_SECRET_RELEASE = "E951B860717D482B97C102FC8A15878F";
+
+    public static final String KEY_DEVICE_ID = "device_id";
 }

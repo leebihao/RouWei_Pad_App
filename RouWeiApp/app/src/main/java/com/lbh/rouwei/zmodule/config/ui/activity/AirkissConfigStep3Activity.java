@@ -2,12 +2,11 @@ package com.lbh.rouwei.zmodule.config.ui.activity;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.wifi.WifiManager;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -18,11 +17,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import com.lbh.rouwei.R;
+import com.lbh.rouwei.activity.MainActivity;
 import com.lbh.rouwei.bese.BaseMvpActivity;
+import com.lbh.rouwei.common.constant.Constant;
 import com.lbh.rouwei.zmodule.config.ui.views.CircleProgressBar;
 import com.scinan.sdk.api.v2.agent.DeviceAgent;
 import com.scinan.sdk.api.v2.bean.Device;
@@ -39,13 +37,13 @@ import com.scinan.sdk.util.JsonUtil;
 import com.scinan.sdk.util.LogUtil;
 import com.scinan.sdk.util.PreferenceUtil;
 import com.scinan.sdk.volley.FetchDataCallback;
+import com.tencent.mmkv.MMKV;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import permissions.dispatcher.RuntimePermissions;
 
 public class AirkissConfigStep3Activity extends BaseMvpActivity implements ConfigDeviceCallback2, FetchDataCallback {
 
@@ -307,7 +305,8 @@ public class AirkissConfigStep3Activity extends BaseMvpActivity implements Confi
                 mAddDeviceTimer.cancel();
                 showToast(getString(R.string.add_success));
                 isAddSuccess = true;
-
+                MMKV.defaultMMKV().encode(Constant.KEY_DEVICE_ID, mDeviceId);
+                startActivity(new Intent(this, MainActivity.class));
                 cancellAll();
                 break;
         }

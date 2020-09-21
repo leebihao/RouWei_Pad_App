@@ -2,13 +2,16 @@ package com.lbh.rouwei.bese;
 
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Lifecycle;
 
 import com.lbh.rouwei.R;
+import com.lbh.rouwei.common.constant.Constant;
 import com.lbh.rouwei.common.network.AppController;
 import com.lbh.rouwei.mvp.base.BasePresenter;
 import com.lbh.rouwei.mvp.base.BaseView;
@@ -18,6 +21,7 @@ import com.scinan.sdk.hardware.HardwareCmd;
 import com.scinan.sdk.lan.v1.LANRequestHelper;
 import com.scinan.sdk.util.AndroidUtil;
 import com.scinan.sdk.util.LogUtil;
+import com.tencent.mmkv.MMKV;
 
 import java.util.Locale;
 
@@ -28,6 +32,13 @@ import autodispose2.androidx.lifecycle.AndroidLifecycleScopeProvider;
 public abstract class BaseMvpActivity<T extends BasePresenter> extends BaseActivity implements BaseView {
 
     protected T mPresenter;
+
+    protected String deviceId;
+
+    @Override
+    public void initView() {
+        deviceId = MMKV.defaultMMKV().decodeString(Constant.KEY_DEVICE_ID);
+    }
 
     @Override
     protected void onDestroy() {

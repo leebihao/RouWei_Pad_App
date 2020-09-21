@@ -33,6 +33,7 @@ import com.scinan.sdk.service.IPushService;
 import com.scinan.sdk.service.PushService;
 import com.scinan.sdk.util.AndroidUtil;
 import com.scinan.sdk.util.LogUtil;
+import com.scinan.sdk.volley.FetchDataCallback;
 
 import butterknife.ButterKnife;
 
@@ -44,7 +45,7 @@ import butterknife.ButterKnife;
  *     desc   :
  * </pre>
  */
-public abstract class BaseActivity extends AppCompatActivity implements AppController.ControllerCallback, FiveSecondTimer.FiveSeconeTimerCallback {
+public abstract class BaseActivity extends AppCompatActivity implements AppController.ControllerCallback, FiveSecondTimer.FiveSeconeTimerCallback, FetchDataCallback {
 
     protected Context context;
     protected AppController mAppController;
@@ -71,6 +72,8 @@ public abstract class BaseActivity extends AppCompatActivity implements AppContr
         this.initView();
         mUserAgent = new UserAgent(this);
         mRequestHelper = RequestHelper.getInstance(this);
+        mDeviceAgent = new DeviceAgent(this);
+        mDeviceAgent.registerAPIListener(this);
         // 控制组件
         mAppController = AppController.getController(this);
         mAppController.registerAPIListener(this);
@@ -222,6 +225,16 @@ public abstract class BaseActivity extends AppCompatActivity implements AppContr
         } catch (RemoteException e) {
             LogUtil.e(e);
         }
+    }
+
+    @Override
+    public void OnFetchDataSuccess(int api, int responseCode, String responseBody) {
+
+    }
+
+    @Override
+    public void OnFetchDataFailed(int api, Throwable error, String responseBody) {
+
     }
 
     protected class TimeOutDownTimer extends CountDownTimer {

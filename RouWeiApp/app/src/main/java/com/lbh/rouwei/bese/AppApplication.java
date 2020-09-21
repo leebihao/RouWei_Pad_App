@@ -6,10 +6,14 @@ import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
 import com.lbh.rouwei.common.constant.Constant;
+import com.lbh.rouwei.common.utils.RxJavaUtils;
 import com.scinan.sdk.config.BuildConfig;
 import com.scinan.sdk.config.Configuration;
 import com.socks.library.KLog;
 import com.tencent.mmkv.MMKV;
+
+import io.reactivex.Observable;
+import io.reactivex.internal.operators.observable.ObservableError;
 
 /**
  * <pre>
@@ -30,6 +34,10 @@ public class AppApplication extends MultiDexApplication {
         KLog.init(true);
 
         initScinanConfig();
+        //定时任务
+//        RxJavaUtils.interval(1000, number -> {
+//
+//        });
     }
 
     @Override

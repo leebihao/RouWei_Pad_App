@@ -3,6 +3,7 @@ package com.lbh.rouwei.activity;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,6 +14,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.lbh.rouwei.R;
 import com.lbh.rouwei.bese.BaseMvpActivity;
 import com.lbh.rouwei.common.bean.AllStatus;
+import com.lbh.rouwei.common.hardware.AppOptionCode;
 import com.lbh.rouwei.common.utils.AppUtil;
 import com.scinan.sdk.hardware.HardwareCmd;
 
@@ -43,7 +45,14 @@ public class WindActivity extends BaseMvpActivity {
     AllStatus allStatus;
     int windspeed = 0;
     TypedArray arrWIND;//获取物品图片的数组资源
+    @BindView(R.id.btn_add_wind)
+    Button btnAddWind;
+    @BindView(R.id.tv_wind_level)
+    TextView tvWindLevel;
+    @BindView(R.id.reduce_add_wind)
+    Button reduceAddWind;
     private int flagPage = 0;//0:模式 1: 风速
+    private int mode = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,11 +70,13 @@ public class WindActivity extends BaseMvpActivity {
 
     @Override
     public void initView() {
+        super.initView();
         ivWindSrc.setImageResource(arrWIND.getResourceId(windspeed - 1, R.drawable.icon_wind_1));
         //只要模式页面才设置
         if (flagPage == 0) {
             setLayoutBg();
             tv_pm25.setVisibility(View.VISIBLE);
+            mode = Integer.parseInt(allStatus.mode);
         } else {
             tv_pm25.setVisibility(View.GONE);
         }
@@ -90,10 +101,10 @@ public class WindActivity extends BaseMvpActivity {
         } else if (pm25 > 70 && pm25 <= 105) {
             cl_bg.setBackgroundResource(R.color.wind_bg_orange);
             tv_pm25.setText("室内污染指数：" + pm25 + "  中");
-        } else if (pm25 > 105 && pm25 <= 140) {
+        } else if (pm25 > 105 && pm25 <= 150) {
             cl_bg.setBackgroundResource(R.color.wind_bg_red);
             tv_pm25.setText("室内污染指数：" + pm25 + "  差");
-        } else if (pm25 >= 141) {
+        } else if (pm25 >= 151) {
             cl_bg.setBackgroundResource(R.color.wind_bg_red_black);
             tv_pm25.setText("室内污染指数：" + pm25 + "  污染严重");
         } else {
@@ -126,6 +137,40 @@ public class WindActivity extends BaseMvpActivity {
     @OnClick(R.id.btn_home)
     public void onBtnHomeClicked() {
         AppUtil.goAndroidHome(context);
+    }
+
+    @OnClick(R.id.btn_add_wind)
+    public void onBtnAddWindClicked() {
+        if (mode == 2) {
+            showToast("自动模式下不能调节风速");
+            return;
+        }
+        if (windspeed >= 5) {
+            windspeed = 5;
+            showToast("最大档位为5档");
+            return;
+        }
+
+        windspeed++;
+        mAppController.sendCommand(AppOptionCode.STATUS_WIND_LEVEL, deviceId, String.valueOf(windspeed));
+
+    }
+
+    @OnClick(R.id.reduce_add_wind)
+    public void onBtnReduceWindClicked() {
+        if (mode == 2) {
+            showToast("自动模式下不能调节风速");
+            return;
+        }
+
+        if (windspeed <= 1) {
+            windspeed = 1;
+            showToast("最低档位为1档");
+            return;
+        }
+
+        windspeed--;
+        mAppController.sendCommand(AppOptionCode.STATUS_WIND_LEVEL, deviceId, String.valueOf(windspeed));
     }
 
     @Override

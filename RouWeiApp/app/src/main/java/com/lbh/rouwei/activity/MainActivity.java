@@ -1,6 +1,8 @@
 package com.lbh.rouwei.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -9,18 +11,21 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.blankj.utilcode.util.TimeUtils;
 import com.lbh.rouwei.R;
 import com.lbh.rouwei.bese.BaseMvpActivity;
 import com.lbh.rouwei.common.bean.AllStatus;
+import com.lbh.rouwei.common.constant.Constant;
 import com.lbh.rouwei.common.hardware.AppOptionCode;
 import com.lbh.rouwei.common.utils.AppUtil;
 import com.lbh.rouwei.zmodule.config.ui.activity.AirkissConfigStep1Activity;
 import com.lbh.rouwei.zmodule.login.ui.activity.LoginActivity;
 import com.scinan.sdk.hardware.HardwareCmd;
 import com.scinan.sdk.util.TimeUtil;
+import com.tencent.mmkv.MMKV;
 
 import java.util.Date;
 
@@ -71,7 +76,6 @@ public class MainActivity extends BaseMvpActivity {
     @BindView(R.id.container)
     ConstraintLayout container;
 
-    String deviceId;
     AllStatus allStatus;
     int windValue = 1;
     private boolean isPowerOn = false;
@@ -82,7 +86,18 @@ public class MainActivity extends BaseMvpActivity {
     }
 
     @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        String id = getIntent().getStringExtra(Constant.KEY_DEVICE_ID);
+        if (!TextUtils.isEmpty(id)) {
+            deviceId = id;
+            MMKV.defaultMMKV().encode(Constant.KEY_DEVICE_ID,deviceId);
+        }
+    }
+
+    @Override
     public void initView() {
+        super.initView();
         tvDateTime.setText(TimeUtil.getCurrentDate(TimeUtil.dateFormatHM));
         String date = TimeUtil.getCurrentDate("MM月dd日") + " " + TimeUtil.getWeekOfDate(new Date());
         tvDay.setText(date);
@@ -195,7 +210,6 @@ public class MainActivity extends BaseMvpActivity {
         windValue = allStatus.getWindValue();
         tvCurWind.setText("风速：" + windValue);
         tvCurFunction.setText(allStatus.isNegativeIonSwitchOn() ? "功能：负离子开" : "功能：负离子关");
-
 
     }
 }
