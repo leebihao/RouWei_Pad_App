@@ -24,7 +24,7 @@ public class BootBroadcastReceiver extends BroadcastReceiver {
         if (intent.getAction().equals(ACTION)) {
 
             Log.d("lbh_boot", "onReceive: " + intent.getAction());
-            Intent bootIntent = new Intent(context, SplashActivity.class);
+            Intent bootIntent = new Intent(context, MainActivity.class);
             bootIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(bootIntent);
         }

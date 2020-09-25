@@ -33,11 +33,14 @@ public abstract class BaseMvpActivity<T extends BasePresenter> extends BaseActiv
 
     protected T mPresenter;
 
-    protected String deviceId;
-
     @Override
     public void initView() {
-        deviceId = MMKV.defaultMMKV().decodeString(Constant.KEY_DEVICE_ID);
+
+    }
+
+    @Override
+    public void initData() {
+
     }
 
     @Override
@@ -88,4 +91,5 @@ public abstract class BaseMvpActivity<T extends BasePresenter> extends BaseActiv
 
         return false;
     }
+
 }

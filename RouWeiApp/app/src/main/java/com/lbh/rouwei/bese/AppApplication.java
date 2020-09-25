@@ -9,6 +9,7 @@ import com.lbh.rouwei.common.constant.Constant;
 import com.lbh.rouwei.common.utils.RxJavaUtils;
 import com.scinan.sdk.config.BuildConfig;
 import com.scinan.sdk.config.Configuration;
+import com.scinan.sdk.util.AndroidUtil;
 import com.socks.library.KLog;
 import com.tencent.mmkv.MMKV;
 
@@ -48,8 +49,15 @@ public class AppApplication extends MultiDexApplication {
 
     private void initScinanConfig() {
         // 初始化软件信息
+        com.scinan.sdk.config.BuildConfig.API_DEBUG = BuildConfig.API_DEBUG;
+        com.scinan.sdk.config.BuildConfig.LOG_DEBUG = BuildConfig.LOG_DEBUG;
+        com.scinan.sdk.config.BuildConfig.MQTT_SSL = BuildConfig.MQTT_SSL;
+        com.scinan.sdk.config.BuildConfig.LOG_WRITE = BuildConfig.LOG_WRITE;
+        // 初始化软件信息
         Configuration.setContext(this);
         Configuration.setAppKey(BuildConfig.API_DEBUG ? Constant.APP_KEY_DEBUG : Constant.APP_KEY_RELEASE);
         Configuration.setAppSecret(BuildConfig.API_DEBUG ? Constant.APP_SECRET_DEBUG : Constant.APP_SECRET_RELEASE);
+        AndroidUtil.startPushService(this);
+        AndroidUtil.startForgroundHeartbeatService(this);
     }
 }

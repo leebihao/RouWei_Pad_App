@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.wifi.WifiManager;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
@@ -306,6 +307,8 @@ public class AirkissConfigStep3Activity extends BaseMvpActivity implements Confi
                 showToast(getString(R.string.add_success));
                 isAddSuccess = true;
                 MMKV.defaultMMKV().encode(Constant.KEY_DEVICE_ID, mDeviceId);
+                AndroidUtil.startPushService(this);
+                AndroidUtil.startForgroundHeartbeatService(this);
                 startActivity(new Intent(this, MainActivity.class));
                 cancellAll();
                 break;
@@ -399,6 +402,11 @@ public class AirkissConfigStep3Activity extends BaseMvpActivity implements Confi
             return;
         }
         startRealConfig();
+    }
+
+    @Override
+    protected void getExtarDataFromPrePage(Bundle savedInstanceState) {
+
     }
 
     @Override

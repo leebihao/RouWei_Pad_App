@@ -112,10 +112,8 @@ public class RegisterActivity extends BaseMvpActivity implements RadioGroup.OnCh
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    protected void getExtarDataFromPrePage(Bundle savedInstanceState) {
+
     }
 
     @Override

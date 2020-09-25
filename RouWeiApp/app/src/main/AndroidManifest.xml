@@ -37,7 +37,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:screenOrientation="reverseLandscape"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar.rouwei">
+        android:theme="@style/AppTheme.NoActionBar.rouwei"
+        android:usesCleartextTraffic="true">
+
+        <uses-library android:name="org.apache.http.legacy" android:required="false" />
 
         <meta-data
             android:name="SCINAN_COMPANY"
@@ -84,12 +87,12 @@
         </activity>
         <activity
             android:name=".activity.SplashActivity"
-            android:theme="@style/AppTheme.NoActionBar.rouwei"
-            android:screenOrientation="landscape">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.NoActionBar.rouwei">
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.MAIN" />-->
+            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+            <!--            </intent-filter>-->
         </activity>
         <activity
             android:name=".activity.WindActivity"
@@ -103,10 +106,10 @@
         <activity
             android:name=".activity.MainActivity"
             android:screenOrientation="landscape">
-            <!--            <intent-filter>-->
-            <!--                <action android:name="android.intent.action.MAIN" />-->
-            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
-            <!--            </intent-filter>-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <service
@@ -125,6 +128,38 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
+
+        <receiver
+            android:name="com.scinan.sdk.service.PushService$PushReceiver"
+            android:exported="false"
+            android:process=":push">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.scinan.sdk.push.connect" />
+                <action android:name="com.scinan.sdk.push.close" />
+                <action android:name="com.scinan.sdk.push.heartbeat" />
+                <action android:name="com.scinan.sdk.push.keepalive" />
+            </intent-filter>
+        </receiver>
+        <service
+            android:name="com.scinan.sdk.service.DaemonService"
+            android:exported="false" />
+        <service
+            android:name="com.scinan.sdk.service.ForgroundHeartService"
+            android:exported="false" />
+        <service
+            android:name="com.scinan.sdk.service.PushService"
+            android:exported="false"
+            android:process=":push" />
+        <service
+            android:name="com.scinan.sdk.service.PushService$InnerService"
+            android:exported="false"
+            android:process=":push" />
     </application>
 
 </manifest>

@@ -2,6 +2,7 @@ package com.lbh.rouwei.zmodule.config.ui.activity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.os.Bundle;
 import android.widget.ImageView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -31,6 +32,11 @@ public class AirkissConfigStep1Activity extends BaseMvpActivity {
 //        super.onCreate(savedInstanceState);
 //        AirkissConfigStep1ActivityPermissionsDispatcher.onAddDeviceClickedWithPermissionCheck(this);
 //    }
+
+    @Override
+    protected void getExtarDataFromPrePage(Bundle savedInstanceState) {
+
+    }
 
     @Override
     public int getLayoutId() {
@@ -70,6 +76,7 @@ public class AirkissConfigStep1Activity extends BaseMvpActivity {
     @NeedsPermission({Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_WIFI_STATE})
     public void go2ConfigerPage() {
         startActivity(new Intent(AirkissConfigStep1Activity.this, AirkissConfigStep3Activity.class));
+        finish();
     }
 
     @OnPermissionDenied({Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_WIFI_STATE})

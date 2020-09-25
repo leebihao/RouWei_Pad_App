@@ -1,9 +1,13 @@
 package com.lbh.rouwei.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -18,6 +22,7 @@ import com.lbh.rouwei.zmodule.config.ui.activity.AirkissConfigStep1Activity;
 import com.scinan.sdk.api.v2.network.RequestHelper;
 import com.scinan.sdk.util.JsonUtil;
 import com.scinan.sdk.util.LogUtil;
+import com.socks.library.KLog;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,6 +30,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * <pre>
@@ -42,8 +48,15 @@ public class DeviceListActivity extends BaseMvpActivity implements DeviceListAda
     TextView tvTitle;
     @BindView(R.id.deviceListView)
     ListView deviceListView;
+    @BindView(R.id.iv_go_add)
+    ImageView ivGoAdd;
     private List<SocketDevice> mDeviceList;
     private DeviceListAdapter mDeviceAdapter;
+
+    @Override
+    protected void getExtarDataFromPrePage(Bundle savedInstanceState) {
+
+    }
 
     @Override
     public int getLayoutId() {
@@ -52,12 +65,17 @@ public class DeviceListActivity extends BaseMvpActivity implements DeviceListAda
 
     @Override
     public void initView() {
-        super.initView();
+        ivGoAdd.setVisibility(View.VISIBLE);
         mDeviceList = new ArrayList<>();
         mDeviceAdapter = new DeviceListAdapter(context, mDeviceList);
         mDeviceAdapter.setCallback(this);
         deviceListView.setAdapter(mDeviceAdapter);
         mDeviceAgent.getDeviceList();
+    }
+
+    @Override
+    public void initData() {
+
     }
 
     @Override
@@ -143,9 +161,25 @@ public class DeviceListActivity extends BaseMvpActivity implements DeviceListAda
 
     @Override
     public void OnItemClickListener(int position) {
-        Intent intent = new Intent();
-        intent.putExtra(Constant.KEY_DEVICE_ID,mDeviceList.get(position).getId());
-        startActivity(new Intent(this, MainActivity.class));
+        Intent intent = new Intent(this, MainActivity.class);
+        SocketDevice socketDevice = mDeviceList.get(position);
+
+        KLog.d("fafasfa deviceList-->" + socketDevice.getId());
+        intent.putExtra(Constant.KEY_DEVICE_ID, socketDevice.getId());
+        startActivity(intent);
         finish();
+    }
+
+    @OnClick(R.id.iv_go_add)
+    public void onViewClicked() {
+        startActivityForResult(new Intent(this, AirkissConfigStep1Activity.class), 100);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100) {
+            mDeviceAgent.getDeviceList();
+        }
     }
 }

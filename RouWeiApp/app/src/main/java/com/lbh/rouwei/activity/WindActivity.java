@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.lbh.rouwei.R;
-import com.lbh.rouwei.bese.BaseMvpActivity;
+import com.lbh.rouwei.bese.BaseControlActivity;
 import com.lbh.rouwei.common.bean.AllStatus;
 import com.lbh.rouwei.common.hardware.AppOptionCode;
 import com.lbh.rouwei.common.utils.AppUtil;
@@ -29,7 +29,7 @@ import butterknife.OnClick;
  *     desc   :
  * </pre>
  */
-public class WindActivity extends BaseMvpActivity {
+public class WindActivity extends BaseControlActivity {
     @BindView(R.id.cl_bg)
     ConstraintLayout cl_bg;
     @BindView(R.id.tv_pm25)
@@ -55,12 +55,11 @@ public class WindActivity extends BaseMvpActivity {
     private int mode = 0;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        windspeed = getIntent().getIntExtra("windspeed", 0);
-        allStatus = (AllStatus) getIntent().getSerializableExtra("bean");
-        flagPage = getIntent().getIntExtra("flagPage", 1);
-        arrWIND = getResources().obtainTypedArray(R.array.array_wind);
+    protected void getExtarDataFromPrePage(Bundle savedInstanceState) {
+        Bundle bundle = getIntent().getExtras();
+        windspeed = bundle.getInt("windspeed", 0);
+        allStatus = (AllStatus) bundle.getSerializable("bean");
+        flagPage = bundle.getInt("flagPage", 1);
     }
 
     @Override
@@ -71,7 +70,29 @@ public class WindActivity extends BaseMvpActivity {
     @Override
     public void initView() {
         super.initView();
-        ivWindSrc.setImageResource(arrWIND.getResourceId(windspeed - 1, R.drawable.icon_wind_1));
+//        arrWIND = context.getResources().obtainTypedArray(R.array.array_wind);
+//        ivWindSrc.setImageResource(arrWIND.getResourceId(windspeed - 1, R.drawable.icon_wind_1));
+        switch (windspeed) {
+            case 1:
+                ivWindSrc.setImageResource(R.drawable.icon_wind_1);
+                break;
+            case 2:
+                ivWindSrc.setImageResource(R.drawable.icon_wind_2);
+                break;
+            case 3:
+                ivWindSrc.setImageResource(R.drawable.icon_wind_3);
+                break;
+            case 4:
+                ivWindSrc.setImageResource(R.drawable.icon_wind_4);
+                break;
+            case 5:
+                ivWindSrc.setImageResource(R.drawable.icon_wind_5);
+                break;
+            default:
+                ivWindSrc.setImageResource(R.drawable.icon_wind_1);
+                break;
+
+        }
         //只要模式页面才设置
         if (flagPage == 0) {
             setLayoutBg();
@@ -111,21 +132,6 @@ public class WindActivity extends BaseMvpActivity {
             cl_bg.setBackgroundResource(R.drawable.bg_app);
             tv_pm25.setVisibility(View.GONE);
         }
-
-    }
-
-    @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void hideLoading() {
-
-    }
-
-    @Override
-    public void onError(String errMessage) {
 
     }
 

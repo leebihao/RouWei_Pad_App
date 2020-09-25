@@ -41,6 +41,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.net.NetworkInterface;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -201,8 +202,22 @@ public class AndroidUtil {
         String imei = "";
 
         try {
-            if (checkPermission(context, Manifest.permission.READ_PHONE_STATE)) {
-                imei = telephonyManager.getDeviceId();
+//            if (checkPermission(context, Manifest.permission.READ_PHONE_STATE)) {
+//                imei = telephonyManager.getDeviceId();
+//            }
+            Method method = telephonyManager.getClass().getMethod("getImei", int.class);
+            String imei1 = (String) method.invoke(telephonyManager, 0);
+            String imei2 = (String) method.invoke(telephonyManager, 1);
+            if(TextUtils.isEmpty(imei2)){
+                imei = imei1;
+            }
+            if(!TextUtils.isEmpty(imei1)){
+                //因为手机卡插在不同位置，获取到的imei1和imei2值会交换，所以取它们的最小值,保证拿到的imei都是同一个
+                if(imei1.compareTo(imei2) <= 0){
+                    imei = imei1;
+                }else{
+                    imei = imei2;
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

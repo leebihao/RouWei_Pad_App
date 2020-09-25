@@ -1,5 +1,6 @@
 package com.lbh.rouwei.activity;
 
+import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.ImageView;
@@ -7,19 +8,18 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lbh.rouwei.R;
-import com.lbh.rouwei.bese.BaseMvpActivity;
+import com.lbh.rouwei.bese.BaseControlActivity;
 import com.lbh.rouwei.common.hardware.AppOptionCode;
 import com.lbh.rouwei.common.utils.AppUtil;
 import com.lbh.rouwei.common.utils.RxJavaUtils;
 
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.carbswang.android.numberpickerview.library.NumberPickerView;
 
-public class TimerActivity extends BaseMvpActivity {
+public class TimerActivity extends BaseControlActivity {
 
     @BindView(R.id.iv_back)
     ImageView ivBack;
@@ -55,37 +55,40 @@ public class TimerActivity extends BaseMvpActivity {
         initTime();
     }
 
-    private void initTime() {
-        GregorianCalendar calendar = (GregorianCalendar) GregorianCalendar.getInstance();
-        int h = calendar.get(Calendar.HOUR_OF_DAY);
-        int m = calendar.get(Calendar.MINUTE);
-//        h = h % 12;
-
-        setData(pickerHour, 0, 99, h);
-        setData(pickerMin, 0, 59, m);
+    @Override
+    public void initData() {
+        super.initData();
     }
 
-    private void setData(NumberPickerView picker, int minValue, int maxValue, int value) {
+    private void initTime() {
+        Calendar calendar = Calendar.getInstance();
+        int h = calendar.get(Calendar.HOUR_OF_DAY);
+        int m = calendar.get(Calendar.MINUTE);
+        h = h % 12;
+
+        String[] hours = new String[13];
+        String[] mins = new String[60];
+        for (int i = 0; i < 13; i++) {
+//            hours[i] = String.valueOf(i);
+            hours[i] = String.format("%02d", i);
+        }
+        for (int j = 0; j < 60; j++) {
+            mins[j] = String.format("%02d", j);
+//            mins[j] = String.valueOf(j);
+        }
+
+        setData(pickerHour, 0, 12, h, hours);
+        setData(pickerMin, 0, 59, m, mins);
+    }
+
+    private void setData(NumberPickerView picker, int minValue, int maxValue, int value, String[] displayDatas) {
+        picker.setDisplayedValues(displayDatas);
         picker.setMinValue(minValue);
         picker.setMaxValue(maxValue);
         picker.setValue(value);
-    }
-
-
-    @Override
-    public void showLoading() {
 
     }
 
-    @Override
-    public void hideLoading() {
-
-    }
-
-    @Override
-    public void onError(String errMessage) {
-
-    }
 
     @OnClick(R.id.iv_back)
     public void onIvBackClicked() {
@@ -94,8 +97,8 @@ public class TimerActivity extends BaseMvpActivity {
 
     @OnClick(R.id.btn_start)
     public void onBtnStartClicked() {
-        String h = String.format("02d%", pickerHour.getContentByCurrValue());
-        String m = String.format("02d%", pickerMin.getContentByCurrValue());
+        String h = String.format("%02d", Integer.parseInt(pickerHour.getContentByCurrValue()));
+        String m = String.format("%02d", Integer.parseInt(pickerMin.getContentByCurrValue()));
         mAppController.sendCommand(AppOptionCode.STATUS_TIMER_START, deviceId, h + m);
 
         RxJavaUtils.interval(1000, number -> {
@@ -132,7 +135,12 @@ public class TimerActivity extends BaseMvpActivity {
             }
         }
 
-        tvTime.setText(String.format("02d%", h) + ":" + String.format("02d%", m) + ":" + String.format("02d%", mSecond));
+        tvTime.setText(String.format("%02d", h) + ":" + String.format("%02d", m) + ":" + String.format("%02d", mSecond));
+    }
+
+    @Override
+    protected void getExtarDataFromPrePage(Bundle savedInstanceState) {
+
     }
 
     @Override

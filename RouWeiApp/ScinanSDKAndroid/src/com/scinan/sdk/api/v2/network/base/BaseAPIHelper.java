@@ -155,8 +155,8 @@ public class BaseAPIHelper {
         if (!params.containsKey("company_id")) {
             params.put("company_id", Configuration.getCompanyId(mContext.getApplicationContext()));
         }
-        params.put("imei", Configuration.getIMEI(mContext.getApplicationContext()));
         params.put("token", Configuration.getToken(mContext.getApplicationContext()));
+        params.put("imei", Configuration.getIMEI(mContext.getApplicationContext()));
         params.put("timestamp", AndroidUtil.getGMT8MilliString());
         params.put("language", AndroidUtil.getLanguage());
         params.put("client", AndroidUtil.getSystemOS());

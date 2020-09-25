@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.lbh.rouwei.R;
-import com.lbh.rouwei.bese.BaseMvpActivity;
+import com.lbh.rouwei.bese.BaseControlActivity;
 import com.lbh.rouwei.common.bean.AllStatus;
 import com.lbh.rouwei.common.hardware.AppOptionCode;
 import com.lbh.rouwei.common.utils.AppUtil;
@@ -26,7 +26,7 @@ import butterknife.OnClick;
  *     desc   :
  * </pre>
  */
-public class FunctionActivity extends BaseMvpActivity {
+public class FunctionActivity extends BaseControlActivity {
     @BindView(R.id.iv_back)
     ImageView ivBack;
     @BindView(R.id.tv_title)
@@ -45,10 +45,9 @@ public class FunctionActivity extends BaseMvpActivity {
     AllStatus allStatus;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        allStatus = (AllStatus) getIntent().getSerializableExtra("bean");
-
+    protected void getExtarDataFromPrePage(Bundle savedInstanceState) {
+        Bundle extras = getIntent().getExtras();
+        allStatus = (AllStatus) extras.getSerializable("bean");
     }
 
     @Override
@@ -69,20 +68,6 @@ public class FunctionActivity extends BaseMvpActivity {
         ivUv.setImageResource(allStatus.isUVSwitchOn() ? R.drawable.icon_uv_p : R.drawable.icon_uv_p);
     }
 
-    @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void hideLoading() {
-
-    }
-
-    @Override
-    public void onError(String errMessage) {
-
-    }
 
     @OnClick(R.id.iv_back)
     public void onIvBackClicked() {

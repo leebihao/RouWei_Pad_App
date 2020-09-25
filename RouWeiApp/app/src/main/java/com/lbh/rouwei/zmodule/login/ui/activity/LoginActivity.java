@@ -3,6 +3,7 @@ package com.lbh.rouwei.zmodule.login.ui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.lbh.rouwei.R;
+import com.lbh.rouwei.activity.DeviceListActivity;
 import com.lbh.rouwei.activity.MainActivity;
 import com.lbh.rouwei.bese.BaseMvpActivity;
 import com.lbh.rouwei.common.constant.Constant;
@@ -63,7 +65,6 @@ public class LoginActivity extends BaseMvpActivity implements LoginCallback {
     ConstraintLayout container;
 
     RequestHelper mRequestHelper;
-    UserAgent mUserAgent;
 
     private final static int LOGIN_BY_PHONE = 1;
     private final static int LOGIN_BY_OTHER = 2;
@@ -73,17 +74,26 @@ public class LoginActivity extends BaseMvpActivity implements LoginCallback {
 
 
     @Override
+    protected void getExtarDataFromPrePage(Bundle savedInstanceState) {
+
+    }
+
+    @Override
     public int getLayoutId() {
         return R.layout.activity_login;
     }
 
     @Override
     public void initView() {
-        mUserAgent = new UserAgent(this);
         mRequestHelper = RequestHelper.getInstance(this);
         pwEdit.setTypeface(Typeface.DEFAULT);
         pwEdit.setTransformationMethod(new PasswordTransformationMethod());
         pwEdit.setOnKeyListener(onKeyListener);
+    }
+
+    @Override
+    public void initData() {
+
     }
 
     @Override
@@ -113,7 +123,8 @@ public class LoginActivity extends BaseMvpActivity implements LoginCallback {
 
     @OnClick(R.id.login)
     public void onLoginClicked() {
-        emailAndUserNameLogin();
+//        emailAndUserNameLogin();
+        phoneLogin();
     }
 
     @OnClick(R.id.tv_registered)
@@ -153,7 +164,7 @@ public class LoginActivity extends BaseMvpActivity implements LoginCallback {
     private void login() {
         switch (mCurrentLoginMode) {
             case LOGIN_BY_PHONE:
-                emailAndUserNameLogin();
+                phoneLogin();
                 break;
             case LOGIN_BY_OTHER:
                 emailAndUserNameLogin();
@@ -184,6 +195,35 @@ public class LoginActivity extends BaseMvpActivity implements LoginCallback {
         return true;
     }
 
+    /**
+     * 手机登录
+     *
+     * @return
+     */
+    private boolean phoneLogin() {
+        //判断用户名密码是否为空
+
+        usernameStr = usernameEdit.getText().toString();
+        passwordStr = pwEdit.getText().toString();
+
+
+        if (usernameStr == null || usernameStr.equals("")) {
+            showToast(R.string.username_null);
+            return false;
+        }
+
+        if (passwordStr == null || passwordStr.equals("")) {
+            showToast(R.string.password_null);
+            return false;
+        }
+
+        showLoading();
+        mUserAgent.login(usernameStr, "86", passwordStr, this);
+        return true;
+
+    }
+
+
     @Override
     public void onSuccess(String openId, String digst, String scinanToken) {
 //        dismissWaitDialog();
@@ -191,11 +231,12 @@ public class LoginActivity extends BaseMvpActivity implements LoginCallback {
         Configuration.setToken(scinanToken);
         //判断是否存在设备，没有的话就进去添加设备页面
         String deviceid = MMKV.defaultMMKV().decodeString(Constant.KEY_DEVICE_ID);
-        if (TextUtils.isEmpty(deviceid)) {
-            startActivity(new Intent(this, AirkissConfigStep1Activity.class));
-        } else {
-            startActivity(new Intent(this, MainActivity.class));
-        }
+        startActivity(new Intent(this, DeviceListActivity.class));
+//        if (TextUtils.isEmpty(deviceid)) {
+//            startActivity(new Intent(this, AirkissConfigStep1Activity.class));
+//        } else {
+//            startActivity(new Intent(this, MainActivity.class));
+//        }
         finish();
     }
 
