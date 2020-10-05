@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lbh.rouwei.R;
+import com.lbh.rouwei.activity.DeviceListActivity;
 import com.lbh.rouwei.activity.MainActivity;
 import com.lbh.rouwei.bese.BaseMvpActivity;
 import com.lbh.rouwei.common.constant.Constant;
@@ -309,7 +310,9 @@ public class AirkissConfigStep3Activity extends BaseMvpActivity implements Confi
                 MMKV.defaultMMKV().encode(Constant.KEY_DEVICE_ID, mDeviceId);
                 AndroidUtil.startPushService(this);
                 AndroidUtil.startForgroundHeartbeatService(this);
-                startActivity(new Intent(this, MainActivity.class));
+                Intent intent = new Intent(this, DeviceListActivity.class);
+                startActivity(intent);
+
                 cancellAll();
                 break;
         }

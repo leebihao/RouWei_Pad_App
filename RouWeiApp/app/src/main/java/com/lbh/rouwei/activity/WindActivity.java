@@ -8,7 +8,6 @@ import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.lbh.rouwei.R;
@@ -42,7 +41,7 @@ public class WindActivity extends BaseControlActivity {
     ImageView ivWindSrc;
     @BindView(R.id.btn_home)
     CheckedTextView btnHome;
-    AllStatus allStatus;
+    AllStatus allStatus = new AllStatus();
     int windspeed = 0;
     TypedArray arrWIND;//获取物品图片的数组资源
     @BindView(R.id.btn_add_wind)
@@ -72,6 +71,18 @@ public class WindActivity extends BaseControlActivity {
         super.initView();
 //        arrWIND = context.getResources().obtainTypedArray(R.array.array_wind);
 //        ivWindSrc.setImageResource(arrWIND.getResourceId(windspeed - 1, R.drawable.icon_wind_1));
+        setWindBackImg();
+        //只要模式页面才设置
+        if (flagPage == 0) {
+            setLayoutBg();
+            tv_pm25.setVisibility(View.VISIBLE);
+            mode = Integer.parseInt(allStatus.mode);
+        } else {
+            tv_pm25.setVisibility(View.GONE);
+        }
+    }
+
+    private void setWindBackImg() {
         switch (windspeed) {
             case 1:
                 ivWindSrc.setImageResource(R.drawable.icon_wind_1);
@@ -92,14 +103,6 @@ public class WindActivity extends BaseControlActivity {
                 ivWindSrc.setImageResource(R.drawable.icon_wind_1);
                 break;
 
-        }
-        //只要模式页面才设置
-        if (flagPage == 0) {
-            setLayoutBg();
-            tv_pm25.setVisibility(View.VISIBLE);
-            mode = Integer.parseInt(allStatus.mode);
-        } else {
-            tv_pm25.setVisibility(View.GONE);
         }
     }
 
@@ -184,7 +187,7 @@ public class WindActivity extends BaseControlActivity {
         super.updateUIPush(hardwareCmd);
         allStatus = AllStatus.parseAllStatus(hardwareCmd.data);
         windspeed = Integer.parseInt(allStatus.windSpeed);
-        ivWindSrc.setImageResource(arrWIND.getResourceId(windspeed - 1, R.drawable.icon_wind_1));
+        setWindBackImg();
         if (flagPage == 0) {
             setLayoutBg();
             tv_pm25.setVisibility(View.VISIBLE);

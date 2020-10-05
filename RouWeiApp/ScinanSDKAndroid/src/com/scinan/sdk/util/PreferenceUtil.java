@@ -114,9 +114,6 @@ public class PreferenceUtil {
     }
 
     public static void saveAccount(Context context, Account account) {
-        LogUtil.d("account.getPasswd()=" + account.getPasswd());
-        LogUtil.d("account.getToken()=" + account.getToken());
-        LogUtil.d("account.getUserName()=" + account.getUserName());
         String[] data = new String[]{account.getUserName(), account.getPasswd(), account.getToken(), account.getQQOpenId(), account.getSavePasswd()};
         String[] keys = new String[]{KEY_ACCOUNT_USER_NAME, KEY_ACCOUNT_USER_PASSWORD, KEY_ACCOUNT_TOKEN, KEY_ACCOUNT_OPEN_ID, KEY_ACCOUNT_SAVE_PASSWORD};
         saveStringList(context, keys, data);

@@ -13,30 +13,34 @@ import java.io.Serializable;
  */
 public class AllStatus implements Serializable {
 
-    public String switchStatus;
-    public String windSpeed;
-    public String mode;
-    public String temperature;
-    public String pm25;
-    public String negativeIonSwitch;
-    public String timer;
-    public String uv;
-    public String humidity;
-    public String beepState;
+    public String switchStatus = "0";
+    public String windSpeed = "1";
+    public String mode = "0";
+    public String temperature = "26";
+    public String pm25 = "000001";
+    public String negativeIonSwitch = "0";
+    public String timer = "0000";
+    public String uv = "1";
+    public String humidity = "000";
+    public String beepState = "0";
 
     public static AllStatus parseAllStatus(String data) {
         AllStatus allStatus = new AllStatus();
-        String[] strs = data.split(",", -1);
-        allStatus.switchStatus = strs[0];
-        allStatus.windSpeed = strs[1];
-        allStatus.mode = strs[2];
-        allStatus.temperature = strs[3];
-        allStatus.pm25 = strs[4];
-        allStatus.negativeIonSwitch = strs[5];
-        allStatus.timer = strs[6];
-        allStatus.uv = strs[7];
-        allStatus.humidity = strs[8];
-        allStatus.beepState = strs[9];
+        try {
+            String[] strs = data.split(",", -1);
+            allStatus.switchStatus = strs[0];
+            allStatus.windSpeed = strs[1];
+            allStatus.mode = strs[2];
+            allStatus.temperature = strs[3];
+            allStatus.pm25 = strs[4];
+            allStatus.negativeIonSwitch = strs[5];
+            allStatus.timer = strs[6];
+            allStatus.uv = strs[7];
+            allStatus.humidity = strs[8];
+            allStatus.beepState = strs[9];
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return allStatus;
     }
 

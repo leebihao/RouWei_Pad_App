@@ -9,9 +9,11 @@ import android.widget.TextView;
 
 import com.lbh.rouwei.R;
 import com.lbh.rouwei.bese.BaseControlActivity;
+import com.lbh.rouwei.common.bean.AllStatus;
 import com.lbh.rouwei.common.hardware.AppOptionCode;
 import com.lbh.rouwei.common.utils.AppUtil;
 import com.lbh.rouwei.common.utils.RxJavaUtils;
+import com.scinan.sdk.hardware.HardwareCmd;
 
 import java.util.Calendar;
 
@@ -43,6 +45,7 @@ public class TimerActivity extends BaseControlActivity {
     CheckedTextView btnHome;
 
     private int mSecond = 59;
+    AllStatus allStatus;
 
     @Override
     public int getLayoutId() {
@@ -64,11 +67,11 @@ public class TimerActivity extends BaseControlActivity {
         Calendar calendar = Calendar.getInstance();
         int h = calendar.get(Calendar.HOUR_OF_DAY);
         int m = calendar.get(Calendar.MINUTE);
-        h = h % 12;
+//        h = h % 12;
 
-        String[] hours = new String[13];
+        String[] hours = new String[24];
         String[] mins = new String[60];
-        for (int i = 0; i < 13; i++) {
+        for (int i = 0; i < 24; i++) {
 //            hours[i] = String.valueOf(i);
             hours[i] = String.format("%02d", i);
         }
@@ -77,7 +80,7 @@ public class TimerActivity extends BaseControlActivity {
 //            mins[j] = String.valueOf(j);
         }
 
-        setData(pickerHour, 0, 12, h, hours);
+        setData(pickerHour, 0, 23, h, hours);
         setData(pickerMin, 0, 59, m, mins);
     }
 
@@ -140,7 +143,19 @@ public class TimerActivity extends BaseControlActivity {
 
     @Override
     protected void getExtarDataFromPrePage(Bundle savedInstanceState) {
+        Bundle bundle = getIntent().getExtras();
+        allStatus = (AllStatus) bundle.getSerializable("bean");
 
+    }
+
+    @Override
+    public void updateUIPush(HardwareCmd hardwareCmd) {
+        super.updateUIPush(hardwareCmd);
+        updateUi();
+    }
+
+    private void updateUi() {
+        initTime();
     }
 
     @Override

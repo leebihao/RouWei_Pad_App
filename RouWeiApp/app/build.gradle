@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.butterknife'
 
-def ORIGINAL_VERSION_CODE = 002
-def ORIGINAL_VERSION_NAME = "1.0.2"
+def ORIGINAL_VERSION_CODE = 004
+def ORIGINAL_VERSION_NAME = "1.0.4"
 
 android {
     compileSdkVersion 29
@@ -119,7 +119,8 @@ android {
                     [
                             'src/main/res/common',
                             'src/main/res/login',
-                            'src/main/res/config'
+                            'src/main/res/config',
+                            'src/main/res/video_player'
                     ]//res 目录的拆分
         }
     }
@@ -200,4 +201,11 @@ dependencies {
     annotationProcessor "org.permissionsdispatcher:permissionsdispatcher-processor:4.8.0"
     //picker控件
     implementation 'cn.carbswang.android:NumberPickerView:1.2.0'
+
+    //视频播放
+    implementation 'com.shuyu:GSYVideoPlayer:7.1.6'
+
+    implementation 'com.tencent.bugly:crashreport:latest.release'
+    //其中lat est.release指代最新版本号，也可以指定明确的版本号，例如2.1.5
+    implementation 'com.tencent.bugly:nativecrashreport:latest.release'
 }

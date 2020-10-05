@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.lbh.rouwei.activity.MainActivity;
-import com.lbh.rouwei.activity.SplashActivity;
 
 /**
  * <pre>

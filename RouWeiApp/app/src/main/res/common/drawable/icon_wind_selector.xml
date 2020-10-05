@@ -2,6 +2,6 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:drawable="@drawable/icon_wind_on" android:state_checked="true"></item>
-    <item android:drawable="@drawable/icon_wind_on"></item>
+    <item android:drawable="@drawable/icon_wind"></item>
 
 </selector>

@@ -21,11 +21,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.lbh.rouwei.R;
 import com.lbh.rouwei.activity.DeviceListActivity;
-import com.lbh.rouwei.activity.MainActivity;
 import com.lbh.rouwei.bese.BaseMvpActivity;
 import com.lbh.rouwei.common.constant.Constant;
-import com.lbh.rouwei.zmodule.config.ui.activity.AirkissConfigStep1Activity;
-import com.scinan.sdk.api.v2.agent.UserAgent;
 import com.scinan.sdk.api.v2.network.RequestHelper;
 import com.scinan.sdk.bean.Account;
 import com.scinan.sdk.config.Configuration;
@@ -227,7 +224,7 @@ public class LoginActivity extends BaseMvpActivity implements LoginCallback {
     @Override
     public void onSuccess(String openId, String digst, String scinanToken) {
 //        dismissWaitDialog();
-        PreferenceUtil.saveAccount(this, new Account(usernameStr, passwordStr, scinanToken, openId, digst, "true"));
+        PreferenceUtil.saveAccount(getApplicationContext(), new Account(usernameStr, passwordStr, scinanToken, openId, digst, "true"));
         Configuration.setToken(scinanToken);
         //判断是否存在设备，没有的话就进去添加设备页面
         String deviceid = MMKV.defaultMMKV().decodeString(Constant.KEY_DEVICE_ID);

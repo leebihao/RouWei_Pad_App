@@ -20,6 +20,7 @@
         <item name="android:windowReenterTransition" tools:ignore="NewApi">@transition/slide</item>
         <item name="android:windowBackground">@null</item>
         <item name="android:windowDisablePreview">true</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

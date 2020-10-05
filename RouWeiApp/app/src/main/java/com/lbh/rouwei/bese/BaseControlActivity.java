@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.lbh.rouwei.activity.MainActivity;
 import com.lbh.rouwei.common.constant.Constant;
+import com.lbh.rouwei.common.event.TickEvent;
 import com.lbh.rouwei.common.network.AppController;
 import com.scinan.sdk.alive.FiveSecondTimer;
 import com.scinan.sdk.config.Configuration;
@@ -21,7 +22,12 @@ import com.scinan.sdk.service.IPushService;
 import com.scinan.sdk.service.PushService;
 import com.scinan.sdk.util.AndroidUtil;
 import com.scinan.sdk.util.LogUtil;
+import com.socks.library.KLog;
 import com.tencent.mmkv.MMKV;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * <pre>
@@ -84,27 +90,38 @@ public abstract class BaseControlActivity extends BaseActivity implements AppCon
 
         @Override
         public void onError() throws RemoteException {
+            onPushServiceConnectError();
         }
 
         @Override
         public void onClose() throws RemoteException {
+            onPushClose();
         }
 
         @Override
         public void onPush(final String msg) throws RemoteException {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    HardwareCmd hardwareCmd = HardwareCmd.parse(msg);
-                    if (hardwareCmd == null)
-                        return;
-                    updateUIPush(hardwareCmd);
-                }
+            KLog.d("mPushService msg:" + msg);
+            runOnUiThread(() -> {
+                HardwareCmd hardwareCmd = HardwareCmd.parse(msg);
+                if (hardwareCmd == null)
+                    return;
+                updateUIPush(hardwareCmd);
             });
         }
     };
 
+    protected void onPushClose() {
+        KLog.d("mPushService close");
+
+    }
+
+    protected void onPushServiceConnectError() {
+        KLog.d("mPushService error");
+
+    }
+
     protected void OnPushConnected() {
+        KLog.d("mPushService PushConnected");
     }
 
     @Override
@@ -198,6 +215,7 @@ public abstract class BaseControlActivity extends BaseActivity implements AppCon
 //            showToast(R.string.send_timeout);
         }
     }
+
     protected void showToast(String tip) {
 //        ToastUtil.showMessage(this, tip);
         Toast.makeText(context, tip, Toast.LENGTH_SHORT).show();
@@ -208,4 +226,32 @@ public abstract class BaseControlActivity extends BaseActivity implements AppCon
         Toast.makeText(context, getResources().getString(strId), Toast.LENGTH_SHORT).show();
     }
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+
+    /**
+     * 事件响应方法
+     * 接收消息
+     *
+     * @param event
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventTickCallback(TickEvent event) {
+        onTickEventCallback();
+    }
+
+    protected void onTickEventCallback() {
+
+    }
 }

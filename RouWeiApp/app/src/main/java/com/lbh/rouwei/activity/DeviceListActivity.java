@@ -163,9 +163,8 @@ public class DeviceListActivity extends BaseMvpActivity implements DeviceListAda
     public void OnItemClickListener(int position) {
         Intent intent = new Intent(this, MainActivity.class);
         SocketDevice socketDevice = mDeviceList.get(position);
-
-        KLog.d("fafasfa deviceList-->" + socketDevice.getId());
         intent.putExtra(Constant.KEY_DEVICE_ID, socketDevice.getId());
+        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
         finish();
     }
@@ -173,6 +172,11 @@ public class DeviceListActivity extends BaseMvpActivity implements DeviceListAda
     @OnClick(R.id.iv_go_add)
     public void onViewClicked() {
         startActivityForResult(new Intent(this, AirkissConfigStep1Activity.class), 100);
+    }
+
+    @OnClick(R.id.iv_back)
+    public void onGoBack() {
+        AppUtil.goAndroidHome(this);
     }
 
     @Override

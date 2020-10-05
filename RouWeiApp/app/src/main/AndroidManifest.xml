@@ -25,6 +25,8 @@
     <uses-permission android:name="android.permission.VIBRATE" /> <!-- 在sdcard中创建/删除文件的权限 -->
     <uses-permission android:name="android.permission.FLASHLIGHT" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
     <uses-permission
         android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
         tools:ignore="ProtectedPermissions" />
@@ -52,17 +54,7 @@
         <activity
             android:name=".zmodule.config.ui.activity.AirkissConfigStep1Activity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.NoActionBar.rouwei">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-
-        </activity>
+            android:screenOrientation="landscape"/>
         <activity
             android:name=".zmodule.config.ui.activity.AirkissConfigStep3Activity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -105,13 +97,17 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".activity.MainActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity
+            android:name="com.lbh.rouwei.activity.ADPlayerActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:screenOrientation="landscape"/>
         <service
             android:name=".service.ReceiveDataService"
             android:enabled="true"
