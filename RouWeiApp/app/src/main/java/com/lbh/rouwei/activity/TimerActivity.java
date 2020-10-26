@@ -104,7 +104,7 @@ public class TimerActivity extends BaseControlActivity {
         String m = String.format("%02d", Integer.parseInt(pickerMin.getContentByCurrValue()));
         mAppController.sendCommand(AppOptionCode.STATUS_TIMER_START, deviceId, h + m);
 
-        RxJavaUtils.interval(1000, number -> {
+        RxJavaUtils.interval(1, number -> {
             countTimer();
         });
     }
@@ -155,7 +155,11 @@ public class TimerActivity extends BaseControlActivity {
     }
 
     private void updateUi() {
-        initTime();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 
     @Override

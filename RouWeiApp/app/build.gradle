@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.butterknife'
 
-def ORIGINAL_VERSION_CODE = 004
-def ORIGINAL_VERSION_NAME = "1.0.4"
+def ORIGINAL_VERSION_CODE = 005
+def ORIGINAL_VERSION_NAME = "1.0.5"
 
 android {
     compileSdkVersion 29
@@ -152,11 +152,11 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
 
     //日志输出库
-    implementation 'com.github.zhaokaiqiang.klog:library:1.6.0'
+//    implementation 'com.github.zhaokaiqiang.klog:library:1.6.0'
     //MMKV——基于 mmap 的高性能通用 key-value 组件
     implementation 'com.tencent:mmkv-static:1.2.2'
     //通用工具类
-    implementation 'com.blankj:utilcodex:1.29.0'
+//    implementation 'com.blankj:utilcodex:1.29.0'
     //retrofit2 and okHttp 请求相关
     implementation([
             'com.squareup.retrofit2:retrofit:2.9.0',

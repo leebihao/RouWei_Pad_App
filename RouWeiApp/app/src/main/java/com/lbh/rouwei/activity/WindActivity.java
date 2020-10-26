@@ -2,6 +2,7 @@ package com.lbh.rouwei.activity;
 
 import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckedTextView;
@@ -13,6 +14,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.lbh.rouwei.R;
 import com.lbh.rouwei.bese.BaseControlActivity;
 import com.lbh.rouwei.common.bean.AllStatus;
+import com.lbh.rouwei.common.constant.Constant;
 import com.lbh.rouwei.common.hardware.AppOptionCode;
 import com.lbh.rouwei.common.utils.AppUtil;
 import com.scinan.sdk.hardware.HardwareCmd;
@@ -44,12 +46,18 @@ public class WindActivity extends BaseControlActivity {
     AllStatus allStatus = new AllStatus();
     int windspeed = 0;
     TypedArray arrWIND;//获取物品图片的数组资源
-    @BindView(R.id.btn_add_wind)
-    Button btnAddWind;
-    @BindView(R.id.tv_wind_level)
-    TextView tvWindLevel;
-    @BindView(R.id.reduce_add_wind)
-    Button reduceAddWind;
+    @BindView(R.id.iv_go_add)
+    ImageView ivGoAdd;
+    @BindView(R.id.btn_5)
+    TextView btn5;
+    @BindView(R.id.btn_1)
+    TextView btn1;
+    @BindView(R.id.btn_2)
+    TextView btn2;
+    @BindView(R.id.btn_4)
+    TextView btn4;
+    @BindView(R.id.btn_3)
+    TextView btn3;
     private int flagPage = 0;//0:模式 1: 风速
     private int mode = 0;
 
@@ -57,6 +65,10 @@ public class WindActivity extends BaseControlActivity {
     protected void getExtarDataFromPrePage(Bundle savedInstanceState) {
         Bundle bundle = getIntent().getExtras();
         windspeed = bundle.getInt("windspeed", 0);
+        String id = getIntent().getStringExtra(Constant.KEY_DEVICE_ID);
+        if (!TextUtils.isEmpty(id)) {
+            deviceId = id;
+        }
         allStatus = (AllStatus) bundle.getSerializable("bean");
         flagPage = bundle.getInt("flagPage", 1);
     }
@@ -148,40 +160,6 @@ public class WindActivity extends BaseControlActivity {
         AppUtil.goAndroidHome(context);
     }
 
-    @OnClick(R.id.btn_add_wind)
-    public void onBtnAddWindClicked() {
-        if (mode == 2) {
-            showToast("自动模式下不能调节风速");
-            return;
-        }
-        if (windspeed >= 5) {
-            windspeed = 5;
-            showToast("最大档位为5档");
-            return;
-        }
-
-        windspeed++;
-        mAppController.sendCommand(AppOptionCode.STATUS_WIND_LEVEL, deviceId, String.valueOf(windspeed));
-
-    }
-
-    @OnClick(R.id.reduce_add_wind)
-    public void onBtnReduceWindClicked() {
-        if (mode == 2) {
-            showToast("自动模式下不能调节风速");
-            return;
-        }
-
-        if (windspeed <= 1) {
-            windspeed = 1;
-            showToast("最低档位为1档");
-            return;
-        }
-
-        windspeed--;
-        mAppController.sendCommand(AppOptionCode.STATUS_WIND_LEVEL, deviceId, String.valueOf(windspeed));
-    }
-
     @Override
     public void updateUIPush(HardwareCmd hardwareCmd) {
         super.updateUIPush(hardwareCmd);
@@ -193,6 +171,27 @@ public class WindActivity extends BaseControlActivity {
             tv_pm25.setVisibility(View.VISIBLE);
         } else {
             tv_pm25.setVisibility(View.GONE);
+        }
+    }
+
+    @OnClick({R.id.btn_5, R.id.btn_1, R.id.btn_2, R.id.btn_4, R.id.btn_3})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btn_5:
+                mAppController.sendCommand(AppOptionCode.STATUS_WIND_LEVEL, deviceId, "5");
+                break;
+            case R.id.btn_1:
+                mAppController.sendCommand(AppOptionCode.STATUS_WIND_LEVEL, deviceId, "1");
+                break;
+            case R.id.btn_2:
+                mAppController.sendCommand(AppOptionCode.STATUS_WIND_LEVEL, deviceId, "2");
+                break;
+            case R.id.btn_4:
+                mAppController.sendCommand(AppOptionCode.STATUS_WIND_LEVEL, deviceId, "4");
+                break;
+            case R.id.btn_3:
+                mAppController.sendCommand(AppOptionCode.STATUS_WIND_LEVEL, deviceId, "3");
+                break;
         }
     }
 }

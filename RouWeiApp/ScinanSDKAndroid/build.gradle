@@ -52,7 +52,7 @@ android {
         buildConfigField "String", "SDK_BUILD_OS", "\"" +  getOSName() + "\""
         useLibrary 'org.apache.http.legacy'
         minSdkVersion 14
-        targetSdkVersion 17
+        targetSdkVersion 28
     }
 }
 

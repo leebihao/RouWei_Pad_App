@@ -73,6 +73,9 @@ public class LoginActivity extends BaseMvpActivity implements LoginCallback {
     @Override
     protected void getExtarDataFromPrePage(Bundle savedInstanceState) {
 
+        Account account = PreferenceUtil.getAccount(context);
+        usernameStr =  account.getUserName();
+        passwordStr = account.getPasswd();
     }
 
     @Override
@@ -86,6 +89,8 @@ public class LoginActivity extends BaseMvpActivity implements LoginCallback {
         pwEdit.setTypeface(Typeface.DEFAULT);
         pwEdit.setTransformationMethod(new PasswordTransformationMethod());
         pwEdit.setOnKeyListener(onKeyListener);
+        usernameEdit.setText(usernameStr);
+        pwEdit.setText(passwordStr);
     }
 
     @Override
@@ -227,7 +232,6 @@ public class LoginActivity extends BaseMvpActivity implements LoginCallback {
         PreferenceUtil.saveAccount(getApplicationContext(), new Account(usernameStr, passwordStr, scinanToken, openId, digst, "true"));
         Configuration.setToken(scinanToken);
         //判断是否存在设备，没有的话就进去添加设备页面
-        String deviceid = MMKV.defaultMMKV().decodeString(Constant.KEY_DEVICE_ID);
         startActivity(new Intent(this, DeviceListActivity.class));
 //        if (TextUtils.isEmpty(deviceid)) {
 //            startActivity(new Intent(this, AirkissConfigStep1Activity.class));

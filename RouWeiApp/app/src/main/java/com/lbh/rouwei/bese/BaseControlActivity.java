@@ -22,6 +22,7 @@ import com.scinan.sdk.service.IPushService;
 import com.scinan.sdk.service.PushService;
 import com.scinan.sdk.util.AndroidUtil;
 import com.scinan.sdk.util.LogUtil;
+import com.scinan.sdk.util.PreferenceUtil;
 import com.socks.library.KLog;
 import com.tencent.mmkv.MMKV;
 
@@ -59,6 +60,7 @@ public abstract class BaseControlActivity extends BaseActivity implements AppCon
         fiveSecendTimerCount.registerFiveSecondTimerListener(this);
 
         deviceId = MMKV.defaultMMKV().decodeString(Constant.KEY_DEVICE_ID);
+        deviceId = PreferenceUtil.getString(context,Constant.KEY_DEVICE_ID);
     }
 
     @Override

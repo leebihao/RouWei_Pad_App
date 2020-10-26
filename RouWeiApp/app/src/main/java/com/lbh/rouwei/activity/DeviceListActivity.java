@@ -17,12 +17,15 @@ import com.lbh.rouwei.bese.BaseMvpActivity;
 import com.lbh.rouwei.common.adapter.DeviceListAdapter;
 import com.lbh.rouwei.common.bean.SocketDevice;
 import com.lbh.rouwei.common.constant.Constant;
+import com.lbh.rouwei.common.event.DeviceIdEvent;
 import com.lbh.rouwei.common.utils.AppUtil;
 import com.lbh.rouwei.zmodule.config.ui.activity.AirkissConfigStep1Activity;
 import com.scinan.sdk.api.v2.network.RequestHelper;
 import com.scinan.sdk.util.JsonUtil;
 import com.scinan.sdk.util.LogUtil;
-import com.socks.library.KLog;
+import com.scinan.sdk.util.PreferenceUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -163,8 +166,13 @@ public class DeviceListActivity extends BaseMvpActivity implements DeviceListAda
     public void OnItemClickListener(int position) {
         Intent intent = new Intent(this, MainActivity.class);
         SocketDevice socketDevice = mDeviceList.get(position);
+//        if (socketDevice.isOnline()) {
+//            showToast("设备离线");
+//            return;
+//        }
         intent.putExtra(Constant.KEY_DEVICE_ID, socketDevice.getId());
-        intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        EventBus.getDefault().post(new DeviceIdEvent(socketDevice.getId()));
+        PreferenceUtil.saveString(context,Constant.KEY_DEVICE_ID,socketDevice.getId());
         startActivity(intent);
         finish();
     }

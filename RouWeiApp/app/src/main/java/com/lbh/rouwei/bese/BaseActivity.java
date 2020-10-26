@@ -1,28 +1,32 @@
 package com.lbh.rouwei.bese;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.CountDownTimer;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.WindowManager;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.lbh.rouwei.common.network.AppController;
-import com.scinan.sdk.alive.FiveSecondTimer;
+import com.lbh.rouwei.activity.ADPlayerActivity;
 import com.scinan.sdk.api.v2.agent.DataAgent;
 import com.scinan.sdk.api.v2.agent.DeviceAgent;
 import com.scinan.sdk.api.v2.agent.SensorAgent;
 import com.scinan.sdk.api.v2.agent.UserAgent;
 import com.scinan.sdk.api.v2.network.RequestHelper;
-import com.scinan.sdk.config.Configuration;
-import com.scinan.sdk.hardware.HardwareCmd;
 import com.scinan.sdk.lan.v1.LANRequestHelper;
-import com.scinan.sdk.service.IPushService;
-import com.scinan.sdk.util.AndroidUtil;
-import com.scinan.sdk.util.LogUtil;
 import com.scinan.sdk.volley.FetchDataCallback;
 
+import java.util.concurrent.TimeUnit;
+
 import butterknife.ButterKnife;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
 
 /**
  * <pre>
@@ -33,7 +37,7 @@ import butterknife.ButterKnife;
  * </pre>
  */
 public abstract class BaseActivity extends AppCompatActivity implements FetchDataCallback {
-
+    protected AppApplication app;
     protected Context context;
     protected RequestHelper mRequestHelper;
     protected UserAgent mUserAgent;
@@ -45,12 +49,15 @@ public abstract class BaseActivity extends AppCompatActivity implements FetchDat
 
     protected boolean isRusume = false;
     protected SensorAgent sensorAgent;
+    private Disposable mDisposable;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getExtarDataFromPrePage(savedInstanceState);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         context = this;
+        app = (AppApplication) context.getApplicationContext();
         mClassName = getClass().getName();
         setContentView(this.getLayoutId());
         ButterKnife.bind(this);
@@ -72,6 +79,7 @@ public abstract class BaseActivity extends AppCompatActivity implements FetchDat
     protected void onDestroy() {
         super.onDestroy();
         ButterKnife.bind(this).unbind();
+        stopAdTimer();
 //        mDataAgent.unRegisterAPIListener(this);
 //        mDeviceAgent.unRegisterAPIListener(this);
 
@@ -109,18 +117,69 @@ public abstract class BaseActivity extends AppCompatActivity implements FetchDat
     }
 
 
-
     @Override
     protected void onResume() {
         super.onResume();
         isRusume = true;
+        app.isTouchedApp = true;
+        startAdTimer();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         isRusume = false;
+        stopAdTimer();
     }
 
+    public void startAdTimer() {
+        Log.d("#lbh_timer","startAdTimer");
+        Observable.timer(60, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Long>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable disposable) {
+                        mDisposable = disposable;
+                    }
+
+                    @Override
+                    public void onNext(@NonNull Long number) {
+                        //跳转到广告页面
+                        Log.d("#lbh_timer","startAdTimer 60s 后开启广告");
+                        startActivity(new Intent(context, ADPlayerActivity.class));
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        //取消订阅
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        //取消订阅
+                    }
+                });
+    }
+
+    public void stopAdTimer() {
+        Log.d("#lbh_timer","stopAdTimer");
+        if (mDisposable != null && !mDisposable.isDisposed()) {
+            mDisposable.dispose();
+        }
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+            case MotionEvent.ACTION_MOVE:
+                stopAdTimer();
+                break;
+            case MotionEvent.ACTION_UP:
+                startAdTimer();
+                break;
+        }
+        return super.onTouchEvent(event);
+    }
 
 }

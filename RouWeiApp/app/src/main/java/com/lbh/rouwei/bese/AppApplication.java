@@ -8,9 +8,9 @@ import androidx.multidex.MultiDexApplication;
 import com.lbh.rouwei.common.constant.Constant;
 import com.scinan.sdk.config.BuildConfig;
 import com.scinan.sdk.config.Configuration;
+import com.scinan.sdk.util.AndroidUtil;
 import com.shuyu.gsyvideoplayer.player.PlayerFactory;
 import com.socks.library.KLog;
-import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.mmkv.MMKV;
 
 import tv.danmaku.ijk.media.exo2.Exo2PlayerManager;
@@ -25,14 +25,19 @@ import tv.danmaku.ijk.media.exo2.Exo2PlayerManager;
  */
 public class AppApplication extends MultiDexApplication {
 
+    private static AppApplication app;
+
+    public boolean isTouchedApp = true;
+
     @Override
     public void onCreate() {
         super.onCreate();
-        CrashReport.UserStrategy strategy = new CrashReport.UserStrategy(this);
-        strategy.setAppPackageName("com.lbh_rouwei.full");
-        strategy.setAppReportDelay(10000);
-        strategy.setAppVersion("1.0.3");
-        CrashReport.initCrashReport(getApplicationContext(), "df6ebe44f6", true, strategy);
+        app = this;
+//        CrashReport.UserStrategy strategy = new CrashReport.UserStrategy(this);
+//        strategy.setAppPackageName("com.lbh_rouwei.full");
+//        strategy.setAppReportDelay(10000);
+//        strategy.setAppVersion("1.0.3");
+//        CrashReport.initCrashReport(getApplicationContext(), "df6ebe44f6", true, strategy);
         //初始化MMKV组件
         MMKV.initialize(this);
         //初始化Klog日志组件
@@ -60,7 +65,11 @@ public class AppApplication extends MultiDexApplication {
         Configuration.setContext(this);
         Configuration.setAppKey(BuildConfig.API_DEBUG ? Constant.APP_KEY_DEBUG : Constant.APP_KEY_RELEASE);
         Configuration.setAppSecret(BuildConfig.API_DEBUG ? Constant.APP_SECRET_DEBUG : Constant.APP_SECRET_RELEASE);
-//        AndroidUtil.startPushService(this);
-//        AndroidUtil.startForgroundHeartbeatService(this);
+        AndroidUtil.startPushService(this);
+        AndroidUtil.startForgroundHeartbeatService(this);
+    }
+
+    public static AppApplication getApp() {
+        return app;
     }
 }

@@ -121,7 +121,7 @@
             android:layout_marginStart="260dp"
             android:textColor="@color/white"
             android:textSize="20sp"
-            android:text="@string/register_a_new_account" />
+            android:text="@string/register_a_new_account"/>
 
         <TextView
             android:id="@+id/tv_forget_pwd"
@@ -130,7 +130,9 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="260dp"
             android:textSize="20sp"
+            android:layout_toRightOf="@+id/tv_registered"
             android:textColor="@color/white"
-            android:text="@string/forget_password" />
+            android:text="@string/forget_password"
+            android:layout_marginLeft="@dimen/dp_20"/>
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

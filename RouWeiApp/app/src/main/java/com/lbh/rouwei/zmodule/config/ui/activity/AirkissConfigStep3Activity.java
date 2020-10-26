@@ -7,6 +7,7 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -292,7 +293,7 @@ public class AirkissConfigStep3Activity extends BaseMvpActivity implements Confi
             mCurrentConfigTask.finish();
         if (isAddSuccess) {
             setResult(RESULT_OK);
-            PreferenceUtil.saveSsidPwd(this, ssidEdit.getText().toString(), pwEdit.getText().toString());
+//            PreferenceUtil.saveSsidPwd(this, ssidEdit.getText().toString(), pwEdit.getText().toString());
             finish();
         } else {
 //            ConfigDeviceChoiceActivity_.intent(this).allSSID(allSSID).currentNetworkId(currentNetworkId).SCAN_QRCODE_CODE(SCAN_QRCODE_CODE).deviceSSID(deviceSSID).start();
@@ -308,6 +309,7 @@ public class AirkissConfigStep3Activity extends BaseMvpActivity implements Confi
                 showToast(getString(R.string.add_success));
                 isAddSuccess = true;
                 MMKV.defaultMMKV().encode(Constant.KEY_DEVICE_ID, mDeviceId);
+                PreferenceUtil.saveString(context,Constant.KEY_DEVICE_ID,mDeviceId);
                 AndroidUtil.startPushService(this);
                 AndroidUtil.startForgroundHeartbeatService(this);
                 Intent intent = new Intent(this, DeviceListActivity.class);

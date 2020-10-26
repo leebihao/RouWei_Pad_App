@@ -23,11 +23,11 @@ public class RxJavaUtils {
     /**
      * milliseconds毫秒后执行next操作
      *
-     * @param milliseconds
+     * @param seconds
      * @param next
      */
-    public static void timer(long milliseconds, final IRxNext next) {
-        Observable.timer(milliseconds, TimeUnit.MILLISECONDS)
+    public static void timer(long seconds, final IRxNext next) {
+        Observable.timer(seconds, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Long>() {
                     @Override
@@ -64,7 +64,7 @@ public class RxJavaUtils {
      * @param next
      */
     public static void interval(long milliseconds, final IRxNext next) {
-        Observable.interval(milliseconds, TimeUnit.MILLISECONDS)
+        Observable.interval(milliseconds, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Long>() {
                     @Override
