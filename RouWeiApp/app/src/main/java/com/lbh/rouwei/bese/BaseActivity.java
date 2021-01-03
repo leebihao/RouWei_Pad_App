@@ -122,14 +122,14 @@ public abstract class BaseActivity extends AppCompatActivity implements FetchDat
         super.onResume();
         isRusume = true;
         app.isTouchedApp = true;
-        startAdTimer();
+//        startAdTimer();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         isRusume = false;
-        stopAdTimer();
+//        stopAdTimer();
     }
 
     public void startAdTimer() {
@@ -172,11 +172,14 @@ public abstract class BaseActivity extends AppCompatActivity implements FetchDat
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-            case MotionEvent.ACTION_MOVE:
+                Log.d("TAG_timer", "onTouchEvent  start: ");
                 stopAdTimer();
+            case MotionEvent.ACTION_MOVE:
+
                 break;
             case MotionEvent.ACTION_UP:
                 startAdTimer();
+                Log.d("TAG_timer", "onTouchEvent  stop: ");
                 break;
         }
         return super.onTouchEvent(event);

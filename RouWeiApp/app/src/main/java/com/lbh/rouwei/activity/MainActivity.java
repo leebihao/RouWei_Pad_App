@@ -1,11 +1,11 @@
 package com.lbh.rouwei.activity;
 
 import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,10 +19,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 
+import com.kongzue.dialog.v3.WaitDialog;
 import com.lbh.rouwei.R;
 import com.lbh.rouwei.bese.BaseControlActivity;
 import com.lbh.rouwei.common.bean.AllStatus;
@@ -43,9 +43,15 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends BaseControlActivity {
 
@@ -93,7 +99,6 @@ public class MainActivity extends BaseControlActivity {
     @BindView(R.id.tv_pm25)
     TextView tv_pm25;
 
-    AllStatus allStatus;
     int windValue = 1;
     private boolean isPowerOn = false;
 
@@ -155,40 +160,17 @@ public class MainActivity extends BaseControlActivity {
     @Override
     public void initData() {
         super.initData();
-        if (checkDeviceIsNull()) return;
-        AndroidUtil.startPushService(this);
-        AndroidUtil.startForgroundHeartbeatService(this);
         //定时任务
         RxJavaUtils.interval(1, number -> {
             updateDateLayout();
         });
-
-//        Account account = PreferenceUtil.getAccount(getApplicationContext());
-//        if (account == null) {
-//            btnLogin.setText("登录");
-//            isLogined = false;
-//        } else {
-//            btnLogin.setText("退出登录");
-//            isLogined = true;
-//        }
-    }
-
-    private boolean checkDeviceIsNull() {
-        if (TextUtils.isEmpty(deviceId)) {
-            new AlertDialog.Builder(context).setMessage("未发现串口数据，请通过登录账号进行wifi控制").setPositiveButton("好的", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                }
-            }).setCancelable(false).show();
-            return true;
-        }
-        return false;
     }
 
     @Override
     public void initView() {
         super.initView();
+        //检测30秒串口
+        checkUartIsConnected();
         deviceId = MMKV.defaultMMKV().decodeString(Constant.KEY_DEVICE_ID);
         KLog.d("fafasfa :" + deviceId);
         if (!TextUtils.isEmpty(deviceId)) {
@@ -206,7 +188,7 @@ public class MainActivity extends BaseControlActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        checkDeviceIsNull();
+//        checkUartIsConnected();
     }
 
     @OnClick(R.id.iv_back)
@@ -216,31 +198,22 @@ public class MainActivity extends BaseControlActivity {
 
     @OnClick(R.id.btn_login)
     public void onBtnLoginClicked() {
-//        if (isLogined) {
-//            PreferenceUtil.rmAccountByChangPW(getApplicationContext());
-//            PreferenceUtil.saveAccount(getApplicationContext(),null);
-//        } else {
         startActivity(new Intent(this, LoginActivity.class));
-//        }
     }
 
     @OnClick(R.id.btn_power)
     public void onBtnPowerClicked() {
-        if (TextUtils.isEmpty(deviceId)) {
-            showToast("未连接设备");
-            return;
-        }
 
-        if (allStatus == null) {
-            showToast("设备无全状态");
-            return;
+        if (app.isUartOk) {
+            cmdControlManager.sendUartCmd(AppOptionCode.STATUS_SWITCH_POWER, isPowerOn ? "0" : "1");
+        } else {
+            mAppController.sendCommand(AppOptionCode.STATUS_SWITCH_POWER, deviceId, isPowerOn ? "0" : "1");
         }
-
-        mAppController.sendCommand(AppOptionCode.STATUS_SWITCH_POWER, deviceId, isPowerOn ? "0" : "1");
     }
 
     @OnClick(R.id.rb_home)
     public void onRbHomeClicked() {
+
         AppUtil.goAndroidHome(context);
     }
 
@@ -248,16 +221,6 @@ public class MainActivity extends BaseControlActivity {
     public void onRbFunctionClicked() {
 
         rbFunction.setChecked(!rbFunction.isChecked());
-
-        if (TextUtils.isEmpty(deviceId)) {
-            showToast("未连接设备");
-            return;
-        }
-
-        if (allStatus == null) {
-            showToast("设备无全状态");
-            return;
-        }
 
         if (!allStatus.isPowerOn()) {
             showToast(getString(R.string.tip_open_power));
@@ -275,16 +238,6 @@ public class MainActivity extends BaseControlActivity {
     public void onRbWindClicked() {
 
         rbWind.setChecked(!rbWind.isChecked());
-
-        if (TextUtils.isEmpty(deviceId)) {
-            showToast("未连接设备");
-            return;
-        }
-
-        if (allStatus == null) {
-            showToast("设备无全状态");
-            return;
-        }
 
         if (!allStatus.isPowerOn()) {
             showToast(getString(R.string.tip_open_power));
@@ -305,16 +258,6 @@ public class MainActivity extends BaseControlActivity {
     public void onRbTimerClicked() {
         rbTimer.setChecked(!rbTimer.isChecked());
 
-        if (TextUtils.isEmpty(deviceId)) {
-            showToast("未连接设备");
-            return;
-        }
-
-        if (allStatus == null) {
-            showToast("设备无全状态");
-            return;
-        }
-
         if (!allStatus.isPowerOn()) {
             showToast(getString(R.string.tip_open_power));
             return;
@@ -332,23 +275,16 @@ public class MainActivity extends BaseControlActivity {
 
         rbMode.setChecked(!rbMode.isChecked());
 
-        if (TextUtils.isEmpty(deviceId)) {
-            showToast("未连接设备");
-            return;
-        }
-
-        if (allStatus == null) {
-            showToast("设备无全状态");
-            return;
-        }
-
         if (!allStatus.isPowerOn()) {
             showToast(getString(R.string.tip_open_power));
             return;
         }
 
-        mAppController.sendCommand(AppOptionCode.STATUS_MODE, deviceId, "1");
-
+        if (app.isUartOk) {
+            cmdControlManager.sendUartCmd(AppOptionCode.STATUS_MODE, "1");
+        } else {
+            mAppController.sendCommand(AppOptionCode.STATUS_MODE, deviceId, "1");
+        }
         Intent intent = new Intent(this, WindActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("bean", allStatus);
@@ -374,6 +310,11 @@ public class MainActivity extends BaseControlActivity {
         updateUI(allStatus);
     }
 
+    @Override
+    protected void updateUiFromUart(AllStatus allStatus) {
+        updateUI(allStatus);
+    }
+
     private void updateUI(AllStatus allStatus) {
         if (allStatus == null) {
             llCurData.setVisibility(View.GONE);
@@ -396,7 +337,12 @@ public class MainActivity extends BaseControlActivity {
         windValue = allStatus.getWindValue();
         tvCurWind.setText("风速：" + windValue);
         tvCurFunction.setText(allStatus.isNegativeIonSwitchOn() ? "功能：负离子开" : "功能：负离子关");
-
+//        tvCurTimer.setText(allStatus.isTimerOpen() ? "定时：开" : "定时：关");
+        if (!allStatus.isTimerOpen()) {
+            tvCurTimer.setText("定时：关");
+        } else {
+            tvCurTimer.setText("定时：" + allStatus.getTimeStr());
+        }
         rbFunction.setChecked(isPowerOn);
         rbWind.setChecked(isPowerOn);
         rbTimer.setChecked(isPowerOn);
@@ -460,26 +406,74 @@ public class MainActivity extends BaseControlActivity {
         deviceId = PreferenceUtil.getString(context, Constant.KEY_DEVICE_ID);
         //在相册里面选择好相片之后调回到现在的这个activity中
         switch (requestCode) {
-            case 101://这里的requestCode是我自己设置的，就是确定返回到那个Activity的标志
-                if (resultCode == RESULT_OK) {//resultcode是setResult里面设置的code值
+            //这里的requestCode是我自己设置的，就是确定返回到那个Activity的标志
+            case 101:
+                //resultcode是setResult里面设置的code值
+                if (resultCode == RESULT_OK) {
                     try {
-                        Uri selectedImage = data.getData(); //获取系统返回的照片的Uri
+                        //获取系统返回的照片的Uri
+                        Uri selectedImage = data.getData();
                         String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                        //从系统表中查询指定Uri对应的照片
                         Cursor cursor = getContentResolver().query(selectedImage,
-                                filePathColumn, null, null, null);//从系统表中查询指定Uri对应的照片
+                                filePathColumn, null, null, null);
                         cursor.moveToFirst();
                         int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                         String path = cursor.getString(columnIndex);  //获取照片路径
                         cursor.close();
                         Bitmap bitmap = BitmapFactory.decodeFile(path);
-//                        iv_photo.setImageBitmap(bitmap);
-                        btnPower.setImageBitmap(bitmap);
-//                        Glide.with(context).load(selectedImage).into(container);
+                        BitmapDrawable bgSource = new BitmapDrawable(getResources(), bitmap);
+                        container.setBackground(bgSource);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
                 break;
+            default:
+                break;
         }
+    }
+
+    private Disposable disposable;
+
+    private void checkUartIsConnected() {
+        WaitDialog.show(MainActivity.this, "正在检查串口设备是否正常...");
+        Observable.interval(0, 1000, TimeUnit.MILLISECONDS)
+                .take(30)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Long>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        disposable = d;
+                    }
+
+                    @Override
+                    public void onNext(Long aLong) {
+                        if (app.isUartOk) {
+                            WaitDialog.dismiss();
+                            if (disposable != null && !disposable.isDisposed()) {
+                                disposable.dispose();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        WaitDialog.dismiss();
+                        if (disposable != null && !disposable.isDisposed()) {
+                            disposable.dispose();
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        WaitDialog.dismiss();
+                        showLoginDialog(MainActivity.this);
+                        if (disposable != null && !disposable.isDisposed()) {
+                            disposable.dispose();
+                        }
+                    }
+                });
     }
 }

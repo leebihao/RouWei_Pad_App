@@ -4,7 +4,6 @@ import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -43,9 +42,9 @@ public class WindActivity extends BaseControlActivity {
     ImageView ivWindSrc;
     @BindView(R.id.btn_home)
     CheckedTextView btnHome;
-    AllStatus allStatus = new AllStatus();
     int windspeed = 0;
-    TypedArray arrWIND;//获取物品图片的数组资源
+    //获取物品图片的数组资源
+    TypedArray arrWIND;
     @BindView(R.id.iv_go_add)
     ImageView ivGoAdd;
     @BindView(R.id.btn_5)
@@ -58,7 +57,8 @@ public class WindActivity extends BaseControlActivity {
     TextView btn4;
     @BindView(R.id.btn_3)
     TextView btn3;
-    private int flagPage = 0;//0:模式 1: 风速
+    //0:模式 1: 风速
+    private int flagPage = 0;
     private int mode = 0;
 
     @Override
@@ -81,17 +81,24 @@ public class WindActivity extends BaseControlActivity {
     @Override
     public void initView() {
         super.initView();
-//        arrWIND = context.getResources().obtainTypedArray(R.array.array_wind);
-//        ivWindSrc.setImageResource(arrWIND.getResourceId(windspeed - 1, R.drawable.icon_wind_1));
         setWindBackImg();
         //只要模式页面才设置
         if (flagPage == 0) {
             setLayoutBg();
             tv_pm25.setVisibility(View.VISIBLE);
-            mode = Integer.parseInt(allStatus.mode);
+            try {
+                if (allStatus != null) {
+                    mode = Integer.parseInt(allStatus.mode);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         } else {
             tv_pm25.setVisibility(View.GONE);
         }
+
+        ivBack.setOnClickListener(v -> finish());
     }
 
     private void setWindBackImg() {
@@ -127,8 +134,11 @@ public class WindActivity extends BaseControlActivity {
      * //        5）污染严重：141以上时，背景黑红色#B1538A
      */
     private void setLayoutBg() {
+        if (allStatus == null) {
+            return;
+        }
         int pm25 = allStatus.getPM25();
-        if (pm25 > 0 && pm25 <= 35) {
+        if (pm25 >= 0 && pm25 <= 35) {
             cl_bg.setBackgroundResource(R.color.wind_bg_green);
             tv_pm25.setText("室内污染指数：" + pm25 + "  优");
         } else if (pm25 > 35 && pm25 <= 70) {
@@ -143,21 +153,18 @@ public class WindActivity extends BaseControlActivity {
         } else if (pm25 >= 151) {
             cl_bg.setBackgroundResource(R.color.wind_bg_red_black);
             tv_pm25.setText("室内污染指数：" + pm25 + "  污染严重");
-        } else {
-            cl_bg.setBackgroundResource(R.drawable.bg_app);
-            tv_pm25.setVisibility(View.GONE);
         }
 
-    }
-
-    @OnClick(R.id.iv_back)
-    public void onIvBackClicked() {
-        finish();
     }
 
     @OnClick(R.id.btn_home)
     public void onBtnHomeClicked() {
         AppUtil.goAndroidHome(context);
+    }
+
+    @OnClick(R.id.title_layout)
+    public void onBackClicked() {
+        finish();
     }
 
     @Override
@@ -174,24 +181,70 @@ public class WindActivity extends BaseControlActivity {
         }
     }
 
-    @OnClick({R.id.btn_5, R.id.btn_1, R.id.btn_2, R.id.btn_4, R.id.btn_3})
+    @Override
+    protected void updateUiFromUart(AllStatus allStatus) {
+        this.allStatus = allStatus;
+        windspeed = Integer.parseInt(allStatus.windSpeed);
+        setWindBackImg();
+        if (flagPage == 0) {
+            setLayoutBg();
+            tv_pm25.setVisibility(View.VISIBLE);
+        } else {
+            tv_pm25.setVisibility(View.GONE);
+        }
+    }
+
+    @OnClick({R.id.btn_5, R.id.btn_1, R.id.btn_2, R.id.btn_4, R.id.btn_3, R.id.iv_back})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_5:
-                mAppController.sendCommand(AppOptionCode.STATUS_WIND_LEVEL, deviceId, "5");
+                if (app.isUartOk) {
+                    cmdControlManager.sendUartCmd(AppOptionCode.STATUS_WIND_LEVEL, "5");
+                } else {
+                    mAppController.sendCommand(AppOptionCode.STATUS_WIND_LEVEL, deviceId, "5");
+                }
                 break;
             case R.id.btn_1:
-                mAppController.sendCommand(AppOptionCode.STATUS_WIND_LEVEL, deviceId, "1");
+                if (app.isUartOk) {
+                    cmdControlManager.sendUartCmd(AppOptionCode.STATUS_WIND_LEVEL, "1");
+                } else {
+                    mAppController.sendCommand(AppOptionCode.STATUS_WIND_LEVEL, deviceId, "1");
+                }
                 break;
             case R.id.btn_2:
-                mAppController.sendCommand(AppOptionCode.STATUS_WIND_LEVEL, deviceId, "2");
+                if (app.isUartOk) {
+                    cmdControlManager.sendUartCmd(AppOptionCode.STATUS_WIND_LEVEL, "2");
+                } else {
+                    mAppController.sendCommand(AppOptionCode.STATUS_WIND_LEVEL, deviceId, "2");
+                }
                 break;
             case R.id.btn_4:
-                mAppController.sendCommand(AppOptionCode.STATUS_WIND_LEVEL, deviceId, "4");
+                if (app.isUartOk) {
+                    cmdControlManager.sendUartCmd(AppOptionCode.STATUS_WIND_LEVEL, "4");
+                } else {
+                    mAppController.sendCommand(AppOptionCode.STATUS_WIND_LEVEL, deviceId, "4");
+                }
                 break;
             case R.id.btn_3:
-                mAppController.sendCommand(AppOptionCode.STATUS_WIND_LEVEL, deviceId, "3");
+                if (app.isUartOk) {
+                    cmdControlManager.sendUartCmd(AppOptionCode.STATUS_WIND_LEVEL, "3");
+                } else {
+                    mAppController.sendCommand(AppOptionCode.STATUS_WIND_LEVEL, deviceId, "3");
+                }
                 break;
+            case R.id.iv_back:
+                finish();
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!app.isUartOk && TextUtils.isEmpty(deviceId)) {
+            showLoginDialog(this);
         }
     }
 }

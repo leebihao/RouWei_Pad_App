@@ -1,12 +1,12 @@
 package com.lbh.rouwei.activity;
 
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import androidx.annotation.Nullable;
 
 import com.lbh.rouwei.R;
 import com.lbh.rouwei.bese.BaseControlActivity;
@@ -20,7 +20,7 @@ import butterknife.OnClick;
 
 /**
  * <pre>
- *     author : kentli
+ *     @author : kentli
  *     e-mail : leebihao@outlook.com
  *     time   : 2020/09/12
  *     desc   :
@@ -58,14 +58,16 @@ public class FunctionActivity extends BaseControlActivity {
     @Override
     public void initView() {
         super.initView();
-        updateFunUi();
+        updateFunUi(allStatus);
     }
 
-    private void updateFunUi() {
-        rlNegativeicon.setBackgroundColor(allStatus.isNegativeIonSwitchOn() ? getResources().getColor(R.color.blue) : getResources().getColor(R.color.grey));
-        rlUv.setBackgroundColor(allStatus.isUVSwitchOn() ? getResources().getColor(R.color.blue) : getResources().getColor(R.color.grey));
-        ivNegativeicon.setImageResource(allStatus.isNegativeIonSwitchOn() ? R.drawable.icon_negative_p : R.drawable.icon_negative_n);
-        ivUv.setImageResource(allStatus.isUVSwitchOn() ? R.drawable.icon_uv_p : R.drawable.icon_uv_p);
+    private void updateFunUi(AllStatus allStatus) {
+        if (allStatus != null) {
+            rlNegativeicon.setBackgroundColor(allStatus.isNegativeIonSwitchOn() ? getResources().getColor(R.color.blue) : getResources().getColor(R.color.grey));
+            rlUv.setBackgroundColor(allStatus.isUVSwitchOn() ? getResources().getColor(R.color.blue) : getResources().getColor(R.color.grey));
+            ivNegativeicon.setImageResource(allStatus.isNegativeIonSwitchOn() ? R.drawable.icon_negative_p : R.drawable.icon_negative_n);
+            ivUv.setImageResource(allStatus.isUVSwitchOn() ? R.drawable.icon_uv_p : R.drawable.icon_uv_p);
+        }
     }
 
 
@@ -74,14 +76,35 @@ public class FunctionActivity extends BaseControlActivity {
         finish();
     }
 
+    @OnClick(R.id.title_layout)
+    public void onBackClicked() {
+        finish();
+    }
+
     @OnClick(R.id.rl_negativeicon)
     public void onRlNegativeiconClicked() {
-        mAppController.sendCommand(AppOptionCode.STATUS_SWITCH_NEGAT, deviceId, allStatus.isNegativeIonSwitchOn() ? "0" : "1");
+        if (allStatus == null) {
+            showToast("全状态为空");
+            return;
+        }
+        if (app.isUartOk) {
+            cmdControlManager.sendUartCmd(AppOptionCode.STATUS_SWITCH_NEGAT, allStatus.isNegativeIonSwitchOn() ? "0" : "1");
+        } else {
+            mAppController.sendCommand(AppOptionCode.STATUS_SWITCH_NEGAT, deviceId, allStatus.isNegativeIonSwitchOn() ? "0" : "1");
+        }
     }
 
     @OnClick(R.id.rl_uv)
     public void onRlUvClicked() {
-        mAppController.sendCommand(AppOptionCode.STATUS_SWITCH_UV, deviceId, allStatus.isUVSwitchOn() ? "0" : "1");
+        if (allStatus == null) {
+            showToast("全状态为空");
+            return;
+        }
+        if (app.isUartOk) {
+            cmdControlManager.sendUartCmd(AppOptionCode.STATUS_SWITCH_UV, allStatus.isUVSwitchOn() ? "0" : "1");
+        } else {
+            mAppController.sendCommand(AppOptionCode.STATUS_SWITCH_UV, deviceId, allStatus.isUVSwitchOn() ? "0" : "1");
+        }
     }
 
     @OnClick(R.id.btn_home)
@@ -93,6 +116,21 @@ public class FunctionActivity extends BaseControlActivity {
     public void updateUIPush(HardwareCmd hardwareCmd) {
         super.updateUIPush(hardwareCmd);
         allStatus = AllStatus.parseAllStatus(hardwareCmd.data);
-        updateFunUi();
+        updateFunUi(allStatus);
+    }
+
+    @Override
+    protected void updateUiFromUart(AllStatus allStatus) {
+        Log.d("TAG_uart", "updateUiFromUart---> " + allStatus.toString());
+        this.allStatus = allStatus;
+        updateFunUi(allStatus);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!app.isUartOk && TextUtils.isEmpty(deviceId)) {
+            showLoginDialog(this);
+        }
     }
 }

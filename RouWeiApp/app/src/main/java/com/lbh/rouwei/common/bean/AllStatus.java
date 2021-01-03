@@ -1,5 +1,7 @@
 package com.lbh.rouwei.common.bean;
 
+import android.text.TextUtils;
+
 import java.io.Serializable;
 
 /**
@@ -80,6 +82,31 @@ public class AllStatus implements Serializable {
 
     public boolean isBeepStateSwitchOn() {
         return "1".equals(this.beepState);
+    }
+
+    public boolean isTimerOpen() {
+        try {
+            int t = Integer.parseInt(timer);
+            if (t > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+
+        }
+
+        return false;
+    }
+
+    public String getTimeStr() {
+        if (TextUtils.isEmpty(this.timer)) {
+            return "00:00";
+        }
+        if (timer.length() != 4) {
+            timer = String.format("%04d", timer);
+        }
+        String hour = timer.substring(0, 2);
+        String min = timer.substring(2);
+        return Integer.parseInt(hour) + " 小时" + Integer.parseInt(min) + " 分钟";
     }
 
     @Override

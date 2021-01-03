@@ -60,11 +60,11 @@ public class RxJavaUtils {
     /**
      * 每隔milliseconds毫秒后执行next操作
      *
-     * @param milliseconds
+     * @param seconds
      * @param next
      */
-    public static void interval(long milliseconds, final IRxNext next) {
-        Observable.interval(milliseconds, TimeUnit.SECONDS)
+    public static void interval(long seconds, final IRxNext next) {
+        Observable.interval(seconds, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Long>() {
                     @Override

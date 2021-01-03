@@ -2,17 +2,25 @@ package com.lbh.rouwei.bese;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.text.TextUtils;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.lbh.rouwei.activity.MainActivity;
+import com.lbh.rouwei.common.bean.AllStatus;
 import com.lbh.rouwei.common.constant.Constant;
+import com.lbh.rouwei.common.event.SerialDataEvent;
 import com.lbh.rouwei.common.event.TickEvent;
+import com.lbh.rouwei.common.hardware.CmdControlManager;
 import com.lbh.rouwei.common.network.AppController;
+import com.lbh.rouwei.zmodule.login.ui.activity.LoginActivity;
 import com.scinan.sdk.alive.FiveSecondTimer;
 import com.scinan.sdk.config.Configuration;
 import com.scinan.sdk.contants.Constants;
@@ -23,6 +31,7 @@ import com.scinan.sdk.service.PushService;
 import com.scinan.sdk.util.AndroidUtil;
 import com.scinan.sdk.util.LogUtil;
 import com.scinan.sdk.util.PreferenceUtil;
+import com.scinan.sdk.util.ToastUtil;
 import com.socks.library.KLog;
 import com.tencent.mmkv.MMKV;
 
@@ -44,12 +53,14 @@ public abstract class BaseControlActivity extends BaseActivity implements AppCon
     protected IPushService mPushService;
     protected String deviceId;
     protected AppController mAppController;
-
+    protected CmdControlManager cmdControlManager;
+    protected AllStatus allStatus;
     @Override
     public void initData() {
         // 控制组件
         mAppController = AppController.getController(this);
         mAppController.registerAPIListener(this);
+        cmdControlManager = CmdControlManager.getInstance();
         // bind push service
         Intent bindPushService = new Intent(this, PushService.class);
         bindPushService.setAction(Constants.ACTION_LISTEN_PUSH_STATUS);
@@ -105,8 +116,9 @@ public abstract class BaseControlActivity extends BaseActivity implements AppCon
             KLog.d("mPushService msg:" + msg);
             runOnUiThread(() -> {
                 HardwareCmd hardwareCmd = HardwareCmd.parse(msg);
-                if (hardwareCmd == null)
+                if (hardwareCmd == null) {
                     return;
+                }
                 updateUIPush(hardwareCmd);
             });
         }
@@ -131,8 +143,9 @@ public abstract class BaseControlActivity extends BaseActivity implements AppCon
         if (protocol == 2) {
             runOnUiThread(() -> {
                 HardwareCmd hardwareCmd = HardwareCmd.parse(response);
-                if (hardwareCmd == null)
+                if (hardwareCmd == null) {
                     return;
+                }
                 updateUIPush(hardwareCmd);
             });
         }
@@ -181,7 +194,7 @@ public abstract class BaseControlActivity extends BaseActivity implements AppCon
     // 下发底板命令
     protected void sendCmd(String deviceId, String data) {
         if (!AndroidUtil.isNetworkEnabled(context)) {
-//            showToast("网络故障");
+            showToast("网络故障");
             return;
         }
 
@@ -242,6 +255,8 @@ public abstract class BaseControlActivity extends BaseActivity implements AppCon
     }
 
 
+
+
     /**
      * 事件响应方法
      * 接收消息
@@ -253,7 +268,40 @@ public abstract class BaseControlActivity extends BaseActivity implements AppCon
         onTickEventCallback();
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void receivedUartData(SerialDataEvent event) {
+        if (event.cmd_type == 0) {
+            //串口错误
+            showToast("串口发生错误");
+            return;
+        }
+        String data = event.data;
+        if (TextUtils.isEmpty(data)) {
+            return;
+        }
+        try {
+            String[] list = data.split("/", -1);
+            allStatus = AllStatus.parseAllStatus(list[3]);
+            updateUiFromUart(allStatus);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    protected abstract void updateUiFromUart(AllStatus allStatus);
+
     protected void onTickEventCallback() {
 
+    }
+
+    protected void showLoginDialog(Context context) {
+        new AlertDialog.Builder(context).setMessage("未发现串口数据，请通过登录账号进行wifi控制设备").setPositiveButton("好的", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(context, LoginActivity.class));
+            }
+        }).setCancelable(false).show();
     }
 }

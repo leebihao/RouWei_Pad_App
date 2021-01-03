@@ -14,7 +14,7 @@ public class AppOptionCode extends OptionCode {
 
     //-1 , 0, 3, 901, 902
 
-    public static final int STATUS_GET_STATUS                      = 0;
+    public static final int STATUS_GET_STATUS                        = 0;
     public static final int STATUS_SWITCH_POWER                      = 1;
     public static final int STATUS_WIND_LEVEL                        = 2;
     public static final int STATUS_MODE                              = 3;
