@@ -81,7 +81,6 @@ public class WindActivity extends BaseControlActivity {
     @Override
     public void initView() {
         super.initView();
-        setWindBackImg();
         //只要模式页面才设置
         if (flagPage == 0) {
             setLayoutBg();
@@ -96,12 +95,13 @@ public class WindActivity extends BaseControlActivity {
 
         } else {
             tv_pm25.setVisibility(View.GONE);
+            setWindBackImg(windspeed);
         }
 
         ivBack.setOnClickListener(v -> finish());
     }
 
-    private void setWindBackImg() {
+    private void setWindBackImg(int windspeed) {
         switch (windspeed) {
             case 1:
                 ivWindSrc.setImageResource(R.drawable.icon_wind_1);
@@ -140,19 +140,24 @@ public class WindActivity extends BaseControlActivity {
         int pm25 = allStatus.getPM25();
         if (pm25 >= 0 && pm25 <= 35) {
             cl_bg.setBackgroundResource(R.color.wind_bg_green);
+            setWindBackImg(1);
             tv_pm25.setText("室内污染指数：" + pm25 + "  优");
         } else if (pm25 > 35 && pm25 <= 70) {
             cl_bg.setBackgroundResource(R.color.wind_bg_blue);
+            setWindBackImg(2);
             tv_pm25.setText("室内污染指数：" + pm25 + "  良");
         } else if (pm25 > 70 && pm25 <= 105) {
             cl_bg.setBackgroundResource(R.color.wind_bg_orange);
+            setWindBackImg(3);
             tv_pm25.setText("室内污染指数：" + pm25 + "  中");
         } else if (pm25 > 105 && pm25 <= 150) {
             cl_bg.setBackgroundResource(R.color.wind_bg_red);
             tv_pm25.setText("室内污染指数：" + pm25 + "  差");
+            setWindBackImg(4);
         } else if (pm25 >= 151) {
             cl_bg.setBackgroundResource(R.color.wind_bg_red_black);
             tv_pm25.setText("室内污染指数：" + pm25 + "  污染严重");
+            setWindBackImg(5);
         }
 
     }
@@ -172,12 +177,14 @@ public class WindActivity extends BaseControlActivity {
         super.updateUIPush(hardwareCmd);
         allStatus = AllStatus.parseAllStatus(hardwareCmd.data);
         windspeed = Integer.parseInt(allStatus.windSpeed);
-        setWindBackImg();
+        mode = allStatus.getMode();
+
         if (flagPage == 0) {
             setLayoutBg();
             tv_pm25.setVisibility(View.VISIBLE);
         } else {
             tv_pm25.setVisibility(View.GONE);
+            setWindBackImg(windspeed);
         }
     }
 
@@ -185,17 +192,24 @@ public class WindActivity extends BaseControlActivity {
     protected void updateUiFromUart(AllStatus allStatus) {
         this.allStatus = allStatus;
         windspeed = Integer.parseInt(allStatus.windSpeed);
-        setWindBackImg();
+        mode = allStatus.getMode();
+
+
         if (flagPage == 0) {
             setLayoutBg();
             tv_pm25.setVisibility(View.VISIBLE);
         } else {
+            setWindBackImg(windspeed);
             tv_pm25.setVisibility(View.GONE);
         }
     }
 
-    @OnClick({R.id.btn_5, R.id.btn_1, R.id.btn_2, R.id.btn_4, R.id.btn_3, R.id.iv_back})
+    @OnClick({R.id.btn_5, R.id.btn_1, R.id.btn_2, R.id.btn_4, R.id.btn_3})
     public void onViewClicked(View view) {
+        if (mode != 1) {
+            return;
+        }
+
         switch (view.getId()) {
             case R.id.btn_5:
                 if (app.isUartOk) {
@@ -232,12 +246,14 @@ public class WindActivity extends BaseControlActivity {
                     mAppController.sendCommand(AppOptionCode.STATUS_WIND_LEVEL, deviceId, "3");
                 }
                 break;
-            case R.id.iv_back:
-                finish();
-                break;
             default:
                 break;
         }
+    }
+
+    @OnClick(R.id.iv_back)
+    public void iv_back() {
+        finish();
     }
 
     @Override

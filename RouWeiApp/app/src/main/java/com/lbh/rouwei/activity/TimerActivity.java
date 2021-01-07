@@ -47,7 +47,7 @@ public class TimerActivity extends BaseControlActivity {
     CheckedTextView btnHome;
 
     private int timerHour, timerMin = 0;
-    private int mSecond = 59;
+    private int mSecond = 0;
     AllStatus allStatus;
 
     @Override
@@ -81,9 +81,9 @@ public class TimerActivity extends BaseControlActivity {
             mins[j] = String.format("%02d", j);
         }
 
-        setData(pickerHour, 0, 23, h, hours);
-        setData(pickerMin, 0, 59, m, mins);
-
+        setData(pickerHour, 0, 23, timerHour, hours);
+        setData(pickerMin, 0, 59, timerMin, mins);
+        startTimer();
     }
 
     private void setData(NumberPickerView picker, int minValue, int maxValue, int value, String[] displayDatas) {
@@ -123,11 +123,11 @@ public class TimerActivity extends BaseControlActivity {
         ///S04/1/0000
         RxJavaUtils.cancel();
         tvTime.setText("00:00:00");
-        mSecond = 59;
+        mSecond = 0;
         if (app.isUartOk) {
-            cmdControlManager.sendUartCmd(AppOptionCode.STATUS_TIMER_CANCLE, "0000");
+            cmdControlManager.sendUartCmd(AppOptionCode.STATUS_TIMER_START, "0000");
         } else {
-            mAppController.sendCommand(AppOptionCode.STATUS_TIMER_CANCLE, deviceId, "0000");
+            mAppController.sendCommand(AppOptionCode.STATUS_TIMER_START, deviceId, "0000");
         }
     }
 
@@ -151,6 +151,11 @@ public class TimerActivity extends BaseControlActivity {
                     timerHour = 0;
                     timerMin = 0;
                     mSecond = 0;
+                    if (app.isUartOk) {
+                        cmdControlManager.sendUartCmd(AppOptionCode.STATUS_TIMER_CANCLE, "0000");
+                    } else {
+                        mAppController.sendCommand(AppOptionCode.STATUS_TIMER_CANCLE, deviceId, "0000");
+                    }
                 }
             }
         }
@@ -164,8 +169,8 @@ public class TimerActivity extends BaseControlActivity {
         allStatus = (AllStatus) bundle.getSerializable("bean");
         if (allStatus != null) {
             String timer = allStatus.timer;
-            int hour = Integer.parseInt(timer.substring(0, 2));
-            int min = Integer.parseInt(timer.substring(2));
+            timerHour = Integer.parseInt(timer.substring(0, 2));
+            timerMin = Integer.parseInt(timer.substring(2));
         }
         //开启倒计时
 //        startTimer(hour, min);
@@ -173,7 +178,8 @@ public class TimerActivity extends BaseControlActivity {
     }
 
     private void startTimer() {
-        mSecond = 59;
+        mSecond = 0;
+        tvTime.setText(String.format("%02d", timerHour) + ":" + String.format("%02d", timerMin) + ":" + String.format("%02d", mSecond));
         RxJavaUtils.cancel();
 //        long leftTime = getLeftTime(hour, min);
         RxJavaUtils.interval(1, number -> {

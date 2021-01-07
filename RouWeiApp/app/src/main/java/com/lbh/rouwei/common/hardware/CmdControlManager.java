@@ -55,7 +55,6 @@ public class CmdControlManager {
      */
     private void sendCommand(String cmdStr) {
         Log.d("TAG_cmd", "sendCommand: " + cmdStr);
-        Log.d("TAG_cmd", "sendCommand hex: " + ByteUtil.toStringHex(cmdStr));
         app.sendSerialCmdData(cmdStr);
 
     }

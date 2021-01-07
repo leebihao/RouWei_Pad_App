@@ -17,6 +17,11 @@ public class AllStatus implements Serializable {
 
     public String switchStatus = "0";
     public String windSpeed = "1";
+
+    public int getMode() {
+        return Integer.parseInt(mode);
+    }
+
     public String mode = "0";
     public String temperature = "26";
     public String pm25 = "000001";

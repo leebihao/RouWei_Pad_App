@@ -244,6 +244,12 @@ public class MainActivity extends BaseControlActivity {
             return;
         }
 
+        if (app.isUartOk) {
+            cmdControlManager.sendUartCmd(AppOptionCode.STATUS_MODE, "1");
+        } else {
+            mAppController.sendCommand(AppOptionCode.STATUS_MODE, deviceId, "1");
+        }
+
         Intent intent = new Intent(this, WindActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("bean", allStatus);
@@ -281,9 +287,9 @@ public class MainActivity extends BaseControlActivity {
         }
 
         if (app.isUartOk) {
-            cmdControlManager.sendUartCmd(AppOptionCode.STATUS_MODE, "1");
+            cmdControlManager.sendUartCmd(AppOptionCode.STATUS_MODE, "2");
         } else {
-            mAppController.sendCommand(AppOptionCode.STATUS_MODE, deviceId, "1");
+            mAppController.sendCommand(AppOptionCode.STATUS_MODE, deviceId, "2");
         }
         Intent intent = new Intent(this, WindActivity.class);
         Bundle bundle = new Bundle();
